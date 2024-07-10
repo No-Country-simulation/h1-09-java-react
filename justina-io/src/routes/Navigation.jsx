@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import CheckIn from '../pages/CheckIn';
+import LayoutsNav from '../layouts/LayoutsNav';
 import EditProfile from '../pages/EditProfile';
 import Home from '../pages/Home';
 
@@ -14,7 +15,7 @@ const routes = createBrowserRouter([
     },
     {
         path: "/registrarse",
-        element: <CheckIn />
+        element: <LayoutsNav>  <CheckIn />  </LayoutsNav>
     },
     {
         path: "/",

@@ -147,7 +147,7 @@ const LoginPage = () => {
                     Ingresar
                   </button>
                   <button className="w-full btn btn-default">
-                    <Link to="/registro" className="w-full">
+                    <Link to="/registrarse" className="w-full">
                       Registrarse
                     </Link>
                   </button>
