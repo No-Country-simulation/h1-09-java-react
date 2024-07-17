@@ -1,13 +1,13 @@
-import React from 'react'
 import Navbar from '../components/Navbar/Navbar';
 
-const LayoutsNav = ({children}) => {
+// eslint-disable-next-line react/prop-types
+const LayoutsNav = ({ children }) => {
   return (
     <>
-        <Navbar />
-        {children}
+      <Navbar />
+      {children}
     </>
-  )
-}
+  );
+};
 
 export default LayoutsNav;
