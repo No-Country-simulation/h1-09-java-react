@@ -3,6 +3,9 @@ import sequelize from "./src/database/index.js";
 
 const PORT = process.env.PORT || 8080;
 
+//models
+await import("./src/models/index.js");
+
 const Main = async () => {
   try {
     await sequelize.sync({ force: false });
