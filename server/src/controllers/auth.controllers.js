@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { User } from "../models/User";
+import { generateToken } from "../services/auth.services";
 
 export const createUser = async (req, res) => {
   try {
@@ -11,7 +12,8 @@ export const createUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    res.status(201).json(newUser);
+    const token = generateToken();
+    res.status(201).json(newUser, token);
   } catch (err) {
     res.status(500).json({ message: "Error al crear el usuario " });
   }
