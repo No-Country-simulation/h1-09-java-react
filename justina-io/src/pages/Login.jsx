@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -21,7 +21,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex-auto bg-pattern">
+    <div className="flex-auto h-screen bg-pattern">
       <div className="flex flex-col items-center justify-center p-6 mx-auto lg:py-0 lg:h-screen">
         <div className="flex flex-col items-center w-full gap-10 mt-10">
           <a href="/" className="text-2xl font-semibold text-gray-900">
@@ -49,8 +49,8 @@ const LoginPage = () => {
                       type="email"
                       placeholder="nombre@email.com"
                       className="w-full input input-bordered"
-                      {...register("email", {
-                        required: "Email is required",
+                      {...register('email', {
+                        required: 'Email is required',
                         pattern:
                           /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                       })}
@@ -67,15 +67,15 @@ const LoginPage = () => {
                     </label>
                     <div className="relative flex items-center gap-2 input input-bordered">
                       <input
-                        type={passwordVisible ? "text" : "password"}
+                        type={passwordVisible ? 'text' : 'password'}
                         className=" grow"
                         placeholder="contraseña"
-                        {...register("password", {
-                          required: "Password is required",
+                        {...register('password', {
+                          required: 'Password is required',
                         })}
                       />
                       {errors.password && (
-                        <span className="text-sm text-red-500">
+                        <span className="absolute left-0 text-sm text-red-500 top-12">
                           {errors.password.message}
                         </span>
                       )}
@@ -131,7 +131,7 @@ const LoginPage = () => {
                 <div className="flex justify-end mt-5">
                   <Link
                     to="/recuperacion"
-                    className="no-underline link link-secondary"
+                    className="font-medium no-underline link text-primary-400"
                   >
                     Olvidé mi contraseña
                   </Link>
@@ -143,14 +143,20 @@ const LoginPage = () => {
                 <div className="alert alert-info">Non-valid account</div> */}
 
                 <div className="flex flex-col gap-3 mt-5">
-                  <button type="submit" className="w-full btn btn-secondary">
+                  <button
+                    type="submit"
+                    className="w-full text-white btn bg-primary-400"
+                  >
                     Ingresar
                   </button>
-                  <button className="w-full btn btn-default">
-                    <Link to="/registrarse" className="w-full">
-                      Registrarse
-                    </Link>
-                  </button>
+                  {/* <button
+                    className="w-full btn btn-default"
+                    onClick={(e) => e.preventDefault}
+                  >
+                  </button> */}
+                  <Link to="/registrarse" className="w-full btn btn-default">
+                    Registrarse
+                  </Link>
                 </div>
               </form>
             </div>
@@ -162,4 +168,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
