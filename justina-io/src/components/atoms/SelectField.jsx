@@ -37,6 +37,6 @@ const SelectField = ({ label, id, placeholder }) => {
       </button>
     </div>
   );
-}
+};
 
 export default SelectField;
