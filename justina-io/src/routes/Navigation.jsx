@@ -6,6 +6,8 @@ import LayoutsNav from '../layouts/LayoutsNav';
 import EditProfile from '../pages/EditProfile';
 import Home from '../pages/Home';
 import PasswordRecovery from '../pages/PasswordRecovery';
+import Patients from '../pages/Patients';
+import PatientsList from '../pages/PatientsList';
 
 const routes = createBrowserRouter([
   {
@@ -34,6 +36,22 @@ const routes = createBrowserRouter([
     element: (
       <LayoutsNav>
         <PasswordRecovery />
+      </LayoutsNav>
+    ),
+  },
+  {
+    path: '/pacientes',
+    element: (
+      <LayoutsNav>
+        <PatientsList />
+      </LayoutsNav>
+    ),
+  },
+  {
+    path: '/pacientes/:patient',
+    element: (
+      <LayoutsNav>
+        <Patients />
       </LayoutsNav>
     ),
   },

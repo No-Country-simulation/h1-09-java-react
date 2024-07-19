@@ -12,6 +12,10 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
+    'react/jsx-uses-react': 'off', // React 17+ JSX transform, no need to import React
+    'react/react-in-jsx-scope': 'off', // React 17+ JSX transform, no need to import React
+    'no-unused-vars': ['error', { varsIgnorePattern: '^React$' }],
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-desp': 'off',
     quotes: ['error', 'single'],
