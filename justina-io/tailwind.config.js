@@ -28,6 +28,7 @@ export default {
     },
   },
   plugins: [daisyui],
+  darkMode: 'class',
   daisyui: {
     themes: ['light'],
   },

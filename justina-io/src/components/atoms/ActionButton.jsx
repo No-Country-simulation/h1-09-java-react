@@ -6,6 +6,6 @@ const ActionButton = ({ text, className }) => {
       {text}
     </button>
   );
-}
+};
 
 export default ActionButton;

@@ -1,6 +1,6 @@
 
-import React from 'react'
-import Calendar from '../components/Calendar/Calendar'
+import React from 'react';
+import Calendar from '../components/Calendar/Calendar';
 
 
 const Home = () => {
@@ -51,7 +51,7 @@ const Home = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Home;

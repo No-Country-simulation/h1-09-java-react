@@ -62,6 +62,6 @@ const CheckIn = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CheckIn;
