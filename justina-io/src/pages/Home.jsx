@@ -1,7 +1,5 @@
-
 import React from 'react';
-import Calendar from '../components/Calendar/Calendar';
-
+import Calendar from '../components/calendar/Calendar';
 
 const Home = () => {
   return (
@@ -25,10 +23,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-
         </div>
         <Calendar />
-        
         <div className="drawer-side">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu text-base	bg-base-200 text-base-content min-h-full w-80 p-20 flex-col items-start">
