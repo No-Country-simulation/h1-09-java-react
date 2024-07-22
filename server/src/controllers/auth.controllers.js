@@ -1,5 +1,5 @@
-import { createUser, getUserByEmail } from "../services/users.services";
-import { generateToken } from "../utils/jwt";
+import { createUser, getUserByEmail } from "../services/users.services.js";
+import { generateToken } from "../utils/jwt.js";
 
 export const register = async (req, res) => {
   try {
@@ -28,7 +28,7 @@ export const register = async (req, res) => {
     });
     const accessToken = generateToken(user);
 
-    res.status(200).json({
+    return res.status(200).json({
       user,
       accessToken,
     });
