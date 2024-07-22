@@ -1,20 +1,38 @@
-import bcrypt from "bcrypt";
-import { User } from "../models/User";
-import { generateToken } from "../services/auth.services";
+import { createUser, getUserByEmail } from "../services/users.services";
+import { generateToken } from "../utils/jwt";
 
-export const createUser = async (req, res) => {
+export const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400);
+      throw {
+        code: 400,
+        message: "Debes ingresar email o contraseña",
+        data: null,
+      };
+    }
+    const existingUser = await getUserByEmail();
+    if (existingUser) {
+      res.status(400);
+      throw {
+        code: 400,
+        message: "El email ya se encuentra registrado",
+        data: null,
+      };
+    }
 
-    const newUser = await User.create({
-      username,
+    const user = await createUser({
       email,
-      password: hashedPassword,
+      password,
     });
-    const token = generateToken();
-    res.status(201).json(newUser, token);
+    const accessToken = generateToken(user);
+
+    res.status(200).json({
+      user,
+      accessToken,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error al crear el usuario " });
+    return res.json(err);
   }
 };

@@ -1,6 +1,6 @@
 import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { User } from "./models/User";
+import { User } from "../models/User";
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -21,3 +21,5 @@ passport.use(
     }
   })
 );
+
+export default passport;
