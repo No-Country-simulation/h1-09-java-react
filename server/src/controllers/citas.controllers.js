@@ -18,6 +18,19 @@ export const crearCita = async (req, res) => {
   }
 };
 
+export const obtenerCitaById = async (req, res) => {
+  try {
+    const obtenerCita = await Cita.findByPk(req.params.id);
+    if (obtenerCita) {
+      res.json(obtenerCita);
+    } else {
+      res.status(404).json({ err: "Cita no encontrada" });
+    }
+  } catch (err) {
+    res.status(500).json({ err: "Error al econtrar la cita " });
+  }
+};
+
 export const eliminarCita = async (req, res) => {
   try {
     const borrarCita = await Cita.findByPk(req.params.id);
