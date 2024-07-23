@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
 import Paciente from "./Paciente.js";
 
-const Cita = sequelize.define("citas", {
+const Cita = sequelize.define("cita", {
   idCita: {
     type: DataTypes.INTEGER,
     primaryKey: true,
