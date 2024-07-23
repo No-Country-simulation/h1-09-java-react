@@ -3,7 +3,7 @@ import {
   crearCita,
   eliminarCita,
   obtenerCitas,
-} from "../controllers/citas.controllers";
+} from "../controllers/citas.controllers.js";
 
 const router = Router();
 
