@@ -1,4 +1,4 @@
-import CardPatients from '../components/cardPatients/CardPatients';
+import CardPatients from '../components/CardPatients/CardPatients';
 
 function PatientsList() {
   return (
