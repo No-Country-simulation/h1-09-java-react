@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaHospital } from 'react-icons/fa';
 
-const Calendario = () => {
+const Calendar = () => {
   return (
-    <div className="w-[688px] h-[430px] bg-white p-4 rounded-lg border border-gray-200 shadow-md ml-96 flex items-center justify-center">
+    <div className="w-[688px] h-[430px] mt-12 bg-white p-4 rounded-lg border border-gray-200 shadow-md ml-96 flex items-center justify-center">
       <div className="flex">
         <div className="w-[132px] h-[401px] bg-white rounded-lg shadow mr-4 p-4 flex flex-col items-center">
           <h2 className="text-lg font-bold mb-4 whitespace-nowrap">Agosto 2024</h2>
@@ -63,4 +63,4 @@ const Calendario = () => {
   );
 };
 
-export default Calendario;
+export default Calendar;
