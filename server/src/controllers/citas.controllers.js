@@ -1,4 +1,4 @@
-import Cita from "../models/Citas";
+import Cita from "../models/Citas.js";
 
 export const obtenerCitas = async (req, res) => {
   try {
