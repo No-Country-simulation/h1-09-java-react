@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
-import Paciente from "./Paciente.js";
-import PersonalMedico from "./PersonalMedico.js";
 
 const Cita = sequelize.define("cita", {
   idCita: {
@@ -12,13 +10,13 @@ const Cita = sequelize.define("cita", {
   idPaciente: {
     type: DataTypes.INTEGER,
     references: {
-      model: Paciente,
+      model: "paciente",
       key: "idPaciente",
     },
     idPersonal_Medico: {
       type: DataTypes.INTEGER,
       references: {
-        model: PersonalMedico,
+        model: "PersonalMedico",
         key: "idPersonal_Medico",
       },
     },

@@ -56,7 +56,6 @@ const Paciente = sequelize.define("paciente", {
     type: DataTypes.INTEGER,
     references: {
       model: Cita,
-      key: "idCita",
     },
   },
   nombre: {
