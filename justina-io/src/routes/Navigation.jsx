@@ -8,7 +8,6 @@ import Home from '../pages/Home';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Patients from '../pages/Patients';
 import PatientsList from '../pages/PatientsList';
-import LayoutSidebar from '../layouts/layoutSidebar';
 
 const routes = createBrowserRouter([
   {
@@ -42,17 +41,13 @@ const routes = createBrowserRouter([
   {
     path: '/pacientes',
     element: (
-      <LayoutSidebar>
         <PatientsList />
-        </LayoutSidebar>
     ),
   },
   {
     path: '/pacientes/:patient',
     element: (
-      <LayoutSidebar>
         <Patients />
-      </LayoutSidebar>
     ),
   },
 ]);
