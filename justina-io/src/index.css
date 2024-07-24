@@ -5,3 +5,18 @@
 body{
     background-color: #EFF4FB;
 }
+
+.main-content {
+    display: flex;
+  }
+  
+  #logo-sidebar {
+    width: 256px; /* Tamaño del sidebar */
+  }
+  
+  .content {
+    margin-left: 256px; /* Margen izquierdo igual al ancho del sidebar */
+    padding: 20px;
+    width: calc(100% - 256px);
+  }
+  
