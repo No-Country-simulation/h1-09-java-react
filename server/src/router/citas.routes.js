@@ -11,7 +11,7 @@ const router = Router();
 router.post("/crearCita", crearCita);
 
 router.get("/citas", obtenerCitas);
-router.get("citas/:id", obtenerCitaById);
+router.get("/citas/:id", obtenerCitaById);
 router.delete("/citas/:id", eliminarCita);
 
 export default router;

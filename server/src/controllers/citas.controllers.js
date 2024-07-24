@@ -36,7 +36,7 @@ export const eliminarCita = async (req, res) => {
     const borrarCita = await Cita.findByPk(req.params.id);
     if (borrarCita) {
       await borrarCita.destroy();
-      res.status(204).json({ message: "Cita eliminada" });
+      res.status(200).json({ message: "Cita eliminada con exito" });
     } else {
       res.status(404).json({ message: "Cita no encontrada" });
     }
