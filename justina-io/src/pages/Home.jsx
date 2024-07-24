@@ -1,7 +1,7 @@
 // Home.js
 import React from 'react';
 import './Home.css'; 
-import Calendar from '../components/Calendar/Calendar'; 
+import Calendar from '../components/calendar/Calendar'; 
 import LayoutSidebar from '../layouts/layoutSidebar';
 
 const Home = () => {
