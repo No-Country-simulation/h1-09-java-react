@@ -78,7 +78,7 @@ const Recipe = ({ onClose }) => {
                 <FaBed className="text-gray-500 mb-1" />
               </div>
               <div className="flex flex-col items-center justify-center h-full border">
-                Al dormir 
+                Al dormir
                 <FaMoon className="text-gray-500 mb-1" />
               </div>
               <div className="flex items-center justify-center h-full border">
@@ -143,6 +143,6 @@ const Recipe = ({ onClose }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Recipe;

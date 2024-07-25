@@ -45,7 +45,7 @@ const routes = createBrowserRouter([
     ),
   },
   {
-    path: '/pacientes/:patient',
+    path: '/paciente',
     element: (
         <Patients />
     ),

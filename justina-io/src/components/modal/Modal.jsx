@@ -1,11 +1,12 @@
 import React from 'react';
 import { IoClose } from 'react-icons/io5';
 import Documentoplus from '../../assets/Documentoplus';
+import './Modal.css'; // Asegúrate de importar el archivo de estilos
 
 const Modal = ({ closeModal }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white w-[547px] h-[497px] rounded-lg p-6 relative">
+    <div className="modal-overlay">
+      <div className="modal-content">
         <button
           className="absolute top-4 right-4 bg-gray-200 p-2 rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-300"
           onClick={closeModal}
