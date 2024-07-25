@@ -4,7 +4,7 @@ import LayoutSidebar from '../layouts/layoutSidebar';
 function PatientsList() {
   return (
     <LayoutSidebar>
-    <div className="flex justify-end md:items-end w-100">
+    <div className="flex justify-end mr-20 md:items-end w-100">
     <section className="lg:ml-72 lg:pt-20 lg:pr-5">
       <article className="flex items-center justify-between my-5">
         <h3 className="text-2xl font-semibold text-gray-700 ">Pacientes</h3>
