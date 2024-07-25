@@ -1,56 +1,63 @@
-import sequelize from "../database/index.js";
 import { DataTypes } from "sequelize";
-import Tratamiento from "./Tratamiento.js";
+import sequelize from "../database/index.js";
+import Cita from "./Citas.js";
 import PersonalMedico from "./PersonalMedico.js";
 import TipoDocumento from "./TipoDocumento.js";
+import Tratamiento from "./Tratamiento.js";
 
-const Paciente = sequelize.define('paciente', {
+const Paciente = sequelize.define("paciente", {
   idPaciente: {
     type: DataTypes.INTEGER,
-    primaryKey: true
-},
-idEntidades: {
+    primaryKey: true,
+  },
+  idEntidades: {
     type: DataTypes.INTEGER,
     references: {
-        model: 'entidades',
-        key: 'idEntidades'
-    }
-},
-idPrepagas: {
+      model: "entidades",
+      key: "idEntidades",
+    },
+  },
+  idPrepagas: {
     type: DataTypes.INTEGER,
     references: {
-        model: 'financiadores',
-        key: 'idFinanciadores'
-    }
-},
-idTratamiento: {
+      model: "financiadores",
+      key: "idFinanciadores",
+    },
+  },
+  idTratamiento: {
     type: DataTypes.INTEGER,
     references: {
-        model: Tratamiento,
-        key: 'idTratamiento'
-    }
-},
-idPersonal_medico: {
+      model: Tratamiento,
+      key: "idTratamiento",
+    },
+  },
+  idPersonal_medico: {
     type: DataTypes.INTEGER,
     references: {
-        model: PersonalMedico,
-        key: 'idPersonal_medico'
-    }
-},
-idPatologias: {
+      model: PersonalMedico,
+      key: "idPersonal_medico",
+    },
+  },
+  idPatologias: {
     type: DataTypes.INTEGER,
     references: {
-        model: 'patologias',
-        key: 'idPatologias'
-    }
-},
-idTipo_Documento: {
+      model: "patologias",
+      key: "idPatologias",
+    },
+  },
+  idTipo_Documento: {
     type: DataTypes.INTEGER,
     references: {
-        model: TipoDocumento,
-        key: 'idTipo_Documento'
-    }
-},
+      model: TipoDocumento,
+      key: "idTipo_Documento",
+    },
+  },
+  idCita: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Cita,
+    },
+  },
   nombre: {
     type: DataTypes.STRING(20),
   },
@@ -68,7 +75,7 @@ idTipo_Documento: {
   },
   factor_sanguineo: {
     type: DataTypes.INTEGER,
-  }
-})
+  },
+});
 
 export default Paciente;
