@@ -9,6 +9,7 @@ const Paciente = sequelize.define("paciente", {
   idPaciente: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   idEntidades: {
     type: DataTypes.INTEGER,

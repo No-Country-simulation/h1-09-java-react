@@ -5,7 +5,8 @@ import PersonalMedico from "./PersonalMedico.js";
 const Financiadores = sequelize.define('financiadores', {
   idFinanciadores: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   descripcion: {
     type: DataTypes.INTEGER

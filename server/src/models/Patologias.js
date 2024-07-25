@@ -5,7 +5,8 @@ import Especialidad from "./Especialidad.js";
 const Patologias = sequelize.define('patologias', {
   idPatologias: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   descripcion: {
     type: DataTypes.INTEGER

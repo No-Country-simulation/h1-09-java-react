@@ -26,15 +26,20 @@ const User = sequelize.define("user", {
     allowNull: false,
   },
 
-  pais: {
+  estado_civil: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 
-  dni: {
+  especialidad: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  nro_matricula: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 });
 
 export default User;

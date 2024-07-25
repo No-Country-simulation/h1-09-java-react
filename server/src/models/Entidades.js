@@ -4,7 +4,8 @@ import { DataTypes } from "sequelize";
 const Entidades = sequelize.define('entidades', {
   idEntidades: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   descripcion: {
     type: DataTypes.INTEGER

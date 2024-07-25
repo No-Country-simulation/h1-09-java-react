@@ -6,7 +6,8 @@ import Laboratorio from "./Laboratorio.js";
 const Farmacia = sequelize.define('farmacia', {
   idFarmacia: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   idMedicamento: {
     type: DataTypes.INTEGER,
