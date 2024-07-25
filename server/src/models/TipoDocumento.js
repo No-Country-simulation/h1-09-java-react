@@ -4,7 +4,8 @@ import { DataTypes } from "sequelize";
 const TipoDocumento = sequelize.define('tipo_documento',{
   idTipo_Documento: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   descripcion: {
     type: DataTypes.STRING(30)

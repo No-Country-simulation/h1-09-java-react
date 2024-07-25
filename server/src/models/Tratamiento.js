@@ -4,7 +4,8 @@ import { DataTypes } from "sequelize";
 const Tratamiento = sequelize.define('tratamiento', {
   idTratamiento: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true,
   },
   idPatologias: {
     type: DataTypes.INTEGER,
