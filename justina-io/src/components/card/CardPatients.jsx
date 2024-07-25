@@ -15,7 +15,7 @@ const CardPatients = () => {
   ];
 
   return (
-    <div className="h-[952px] mx-auto p-4">
+    <div className="h-screem mx-auto py-4">
       {patients.map((patient, index) => (
         <Card
           key={index}

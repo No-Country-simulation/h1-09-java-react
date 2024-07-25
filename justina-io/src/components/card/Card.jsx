@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ photo, icon: Icon, name, date, showDownload }) => (
 
-  <div className="w-[1110px] h-[64px] bg-white rounded-lg mb-4 shadow-lg flex items-center justify-between p-2">
+  <div className="w-full h-[64px] bg-white rounded-lg mb-4 shadow-lg flex items-center justify-between p-2">
     <Link to='/paciente' className="flex items-center">
       <div className="w-12 h-12 mr-4 flex items-center justify-center">
         {photo ? (

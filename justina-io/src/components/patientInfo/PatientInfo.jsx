@@ -5,7 +5,7 @@ const PatientInfo = () => {
   const [activeTab, setActiveTab] = useState('Datos médicos');
 
   return (
-    <div className="p-4 space-y-6 relative">
+    <div className="p-4 space-y-6 relative h-screen">
       <div className="flex space-x-4">
         <button
           className={`bg-transparent text-[#4D516F] py-2 px-4 rounded hover:bg-[#CCF3FF] hover:text-[#007CA0] ${activeTab === 'Datos médicos' ? 'bg-[#CCF3FF] text-[#007CA0]' : ''}`}
@@ -90,6 +90,6 @@ const PatientInfo = () => {
       )}
     </div>
   );
-}
+};
 
 export default PatientInfo;
