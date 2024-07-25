@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../card/Card'; 
+import Card from '../card/Card';
 
 const CardPatients = () => {
   const patients = [
@@ -15,13 +15,9 @@ const CardPatients = () => {
   ];
 
   return (
-    <div className="h-[952px] mx-auto p-4">
+    <div className="h-screen mx-auto py-4">
       {patients.map((patient, index) => (
-        <Card
-          key={index}
-          photo={patient.photo}
-          name={patient.name}
-        />
+        <Card key={index} photo={patient.photo} name={patient.name} />
       ))}
     </div>
   );

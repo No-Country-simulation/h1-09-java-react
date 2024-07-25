@@ -8,6 +8,9 @@ import Home from '../pages/Home';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Patients from '../pages/Patients';
 import PatientsList from '../pages/PatientsList';
+//import CircleChart from '../components/atoms/CircleChart';
+//import ChartsHome from '../components/molecules/ChartsHome';
+//import Statistics from '../components/molecules/Statistics';
 
 const routes = createBrowserRouter([
   {
@@ -16,15 +19,11 @@ const routes = createBrowserRouter([
   },
   {
     path: '/registrarse',
-    element: (
-        <CheckIn />
-    ),
+    element: <CheckIn />,
   },
   {
     path: '/',
-    element: (
-        <Home />
-    ),
+    element: <Home />,
   },
   {
     path: '/editar-perfil',
@@ -40,15 +39,11 @@ const routes = createBrowserRouter([
   },
   {
     path: '/pacientes',
-    element: (
-        <PatientsList />
-    ),
+    element: <PatientsList />,
   },
   {
     path: '/pacientes/:patient',
-    element: (
-        <Patients />
-    ),
+    element: <Patients />,
   },
 ]);
 

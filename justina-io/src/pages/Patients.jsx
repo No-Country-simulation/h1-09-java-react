@@ -2,11 +2,12 @@ import PhoneIcon from '../assets/PhoneIcon';
 import MessageIcon from '../assets/MessageIcon';
 import SuspensePoints from '../assets/SuspensePoints';
 import InfoIcon from '../assets/InfoIcon';
+import LayoutSidebar from '../layouts/layoutSidebar';
 
 function Patients() {
   return (
-    <div className="flex h-screen lg:ml-72 ">
-      <section className="flex flex-col w-4/5 gap-8 p-5 mt-20">
+    <LayoutSidebar>
+      <section className="flex flex-col w-full gap-8 py-5 mt-10">
         <article className="flex justify-between">
           <h3 className="text-2xl font-semibold text-gray-700 ">
             Pacientes
@@ -66,7 +67,7 @@ function Patients() {
           </div>
         </article>
       </section>
-    </div>
+    </LayoutSidebar>
   );
 }
 
