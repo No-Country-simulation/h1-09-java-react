@@ -20,12 +20,12 @@ const photos = [
 
 const Chats = () => {
   return (
-    <div className="w-[688px] h-[553px] bg-white p-4">
+    <div className="w-[344px] md:w-[688px] h-auto bg-white p-4 border rounded-lg">
       <h1 className="text-left text-xl mb-4">Chats</h1>
       {chatsData.map((chat, index) => (
         <div
           key={chat.id}
-          className="w-[624px] h-[72px] flex items-center mb-2 bg-white border border-gray-300  rounded-lg p-2"
+          className="w-full h-[72px] flex items-center mb-2 bg-white border border-gray-300 rounded-lg p-2"
         >
           <div className="relative">
             <img
