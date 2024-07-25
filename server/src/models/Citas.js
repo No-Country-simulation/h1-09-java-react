@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
+import GenericUser from "./genericUser.js";
 
 const Cita = sequelize.define("cita", {
   idCita: {
@@ -7,31 +8,43 @@ const Cita = sequelize.define("cita", {
     primaryKey: true,
     autoIncrement: true,
   },
-  idPaciente: {
+  idGenericUser: {
     type: DataTypes.INTEGER,
     references: {
-      model: "paciente",
-      key: "idPaciente",
+      model: GenericUser,
+      key: "idGenericUser",
     },
-    idPersonal_Medico: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "PersonalMedico",
-        key: "idPersonal_Medico",
-      },
+  },
+  idPersonal_Medico: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "PersonalMedico",
+      key: "idPersonal_Medico",
     },
-    fecha: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    hora: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
-    descripcion: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+  },
+  fecha: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  hora: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
+  descripcion: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  tipoDeConsulta: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  ubicacion: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  meetLink: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });
 
