@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    background-color: #EFF4FB;
+}
+
+.main-content {
+    display: flex;
+  }
+  
+  #logo-sidebar {
+    width: 256px;
+  }
+  
+  .content {
+    margin-left: 256px;
+    padding: 20px;
+    width: calc(100% - 256px);
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .card-name {
+    flex: 1;
+    margin-left: 16px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .card-date {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .card-download {
+    margin-left: 16px;
+    color: #007CA0;
+    cursor: pointer;
+  }
+  

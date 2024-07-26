@@ -1,0 +1,31 @@
+.icon-container {
+    position: relative;
+  }
+  
+  .icon-default {
+    display: block;
+  }
+
+  .avatar-nav{
+    margin-left: 1050px;
+  }
+
+  .icon-hover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  a:hover .icon-hover {
+    display: block;
+  }
+  
+  .group:hover {
+    background-color: #FFCCEA;
+  }
+  
+  .group:hover .group-hover\:text-D0298A {
+    color: #D0298A;
+  }
+  
