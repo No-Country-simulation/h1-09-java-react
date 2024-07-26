@@ -5,18 +5,22 @@ import SuspensePoints from '../assets/SuspensePoints';
 import InfoIcon from '../assets/InfoIcon';
 import LayoutSidebar from '../layouts/layoutSidebar';
 import CardWithDate from '../components/card/CardWithDate';
-import Recipe from '../components/recipe/Recipe'; 
-import PatientInfo from '../components/patientInfo/PatientInfo'; 
+import Recipe from '../components/recipe/Recipe';
+import PatientInfo from '../components/patientInfo/PatientInfo';
+import AppointmentModal from '../components/modal/AppointmentModal';
+import ConfirmationModal from '../components/modal/ConfirmationModal';
 import './Patients.css';
 import Statistics from '../components/molecules/Statistics';
 
 function Patients() {
   const [activeSection, setActiveSection] = useState('Tratamiento');
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
-  const [isCardFlipped, setIsCardFlipped] = useState(false); // Estado para manejar el flip
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
 
   const handleCardClick = () => {
-    setIsCardFlipped(!isCardFlipped); // Alterna entre la vista frontal y trasera
+    setIsCardFlipped(!isCardFlipped);
   };
 
   const renderSectionContent = () => {
@@ -40,6 +44,28 @@ function Patients() {
     setIsRecipeModalOpen(false);
   };
 
+  const handleOpenAppointmentModal = () => {
+    setIsAppointmentModalOpen(true);
+  };
+
+  const handleCloseAppointmentModal = () => {
+    setIsAppointmentModalOpen(false);
+  };
+
+  const handleOpenConfirmationModal = () => {
+    setIsConfirmationModalOpen(true);
+    setIsAppointmentModalOpen(false);
+  };
+
+  const handleCloseConfirmationModal = () => {
+    setIsConfirmationModalOpen(false);
+  };
+
+  const handleBackToAppointmentModal = () => {
+    setIsConfirmationModalOpen(false);
+    setIsAppointmentModalOpen(true);
+  };
+
   return (
     <LayoutSidebar>
       <section className="flex flex-col w-full gap-8 py-5 mt-10">
@@ -51,7 +77,7 @@ function Patients() {
           </h3>
           <div className="flex gap-5 font-semibold me-5 text-[#007CA0] text-lg">
             <h3 className="cursor-pointer" onClick={handleOpenRecipeModal}>+ Agregar Receta</h3>
-            <h3 className="cursor-pointer">+ Agregar Cita</h3>
+            <h3 className="cursor-pointer" onClick={handleOpenAppointmentModal}>+ Agregar Cita</h3>
           </div>
         </article>
         <article className="flex gap-5">
@@ -84,7 +110,6 @@ function Patients() {
             </div>
           </div>
 
-          {/* Tarjeta con animación de flip */}
           <div className="relative w-1/3 max-w-sm">
             <div
               className={`flip-card ${isCardFlipped ? 'flipped' : ''}`}
@@ -128,8 +153,11 @@ function Patients() {
         </article>
       </section>
 
-      {/* Mostrar el modal si isRecipeModalOpen es true */}
       {isRecipeModalOpen && <Recipe onClose={handleCloseRecipeModal} />}
+
+      {isAppointmentModalOpen && <AppointmentModal onClose={handleCloseAppointmentModal} onNext={handleOpenConfirmationModal} />}
+
+      {isConfirmationModalOpen && <ConfirmationModal onBack={handleBackToAppointmentModal} onClose={handleCloseConfirmationModal} />}
     </LayoutSidebar>
   );
 }
