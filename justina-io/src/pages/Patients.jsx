@@ -11,6 +11,8 @@ import AppointmentModal from '../components/modal/AppointmentModal';
 import ConfirmationModal from '../components/modal/ConfirmationModal';
 import './Patients.css';
 import Statistics from '../components/molecules/Statistics';
+import Citas from '../components/yourAgenda/Citas';
+
 
 function Patients() {
   const [activeSection, setActiveSection] = useState('Tratamiento');
@@ -31,6 +33,8 @@ function Patients() {
         return <PatientInfo />;
       case 'Tratamiento':
         return <Statistics />;
+      case 'Citas':
+        return <Citas/>;
       default:
         return <div>Contenido de {activeSection}</div>;
     }
@@ -136,7 +140,7 @@ function Patients() {
         <article className="w-full">
           <div className="font-semibold text-gray-700 border-b border-gray-300">
             <ul className="flex gap-8 ms-2">
-              {['Tratamiento', 'Datos del paciente', 'Historial clinico'].map((section) => (
+              {['Tratamiento', 'Citas' , 'Datos del paciente', 'Historial clinico'].map((section) => (
                 <li
                   key={section}
                   className={`nav-item ${activeSection === section ? 'active' : ''}`}
