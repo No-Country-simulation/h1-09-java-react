@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "default-secret";
 
-export const generateToken = () => {
-  return jwt.sign({}, JWT_SECRET, { expiresIn: "3hs" });
+export const generateToken = (data) => {
+  return jwt.sign(data, JWT_SECRET, { expiresIn: "3h" });
 };
 
-export const verifyToken = () => {
-  return jwt.verify(process.env.JWT_SECRET);
+export const verifyToken = (token) => {
+  return jwt.verify(token, process.env.JWT_SECRET);
 };
