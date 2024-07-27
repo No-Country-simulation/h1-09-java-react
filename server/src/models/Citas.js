@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
-import GenericUser from "./genericUser.js";
+import GenericUser from "./GenericUser.js";
 
 const Cita = sequelize.define("cita", {
   idCita: {
