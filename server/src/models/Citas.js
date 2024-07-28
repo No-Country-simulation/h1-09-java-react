@@ -15,11 +15,11 @@ const Cita = sequelize.define("cita", {
       key: "idGenericUser",
     },
   },
-  idPersonal_Medico: {
+  idPersonal_medico: {
     type: DataTypes.INTEGER,
     references: {
-      model: "PersonalMedico",
-      key: "idPersonal_Medico",
+      model: "personal_medico",
+      key: "idPersonal_medico",
     },
   },
   fecha: {
