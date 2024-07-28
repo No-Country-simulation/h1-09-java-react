@@ -7,6 +7,7 @@ import passport from "./middlewares/passport.middleware.js";
 import authRoute from "./router/auth.routes.js";
 import citasRouter from "./router/citas.routes.js";
 import pacientesRouter from "./router/pacientes.routes.js";
+import uploadAccountRouter from "./router/updateProfile.route.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(passport.initialize());
 app.use("/api", authRoute);
 app.use("/api", citasRouter);
 app.use("/api", pacientesRouter);
+app.use("/api", uploadAccountRouter);
 
 app.get("/", (req, res) => {
   res.json({ status: "success" });
