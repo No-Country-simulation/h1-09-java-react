@@ -3,7 +3,7 @@ import Entidades from "./Entidades.js";
 import Especialidad from "./Especialidad.js";
 import Farmacia from "./Farmacia.js";
 import Financiadores from "./Financiadores.js";
-import GenericUser from "./genericUser.js";
+import GenericUser from "./GenericUser.js";
 import Laboratorio from "./Laboratorio.js";
 import Medicamento from "./Medicamento.js";
 import Paciente from "./Paciente.js";
