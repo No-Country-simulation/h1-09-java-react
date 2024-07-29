@@ -48,7 +48,7 @@ export const crearCita = async (req, res) => {
     return res.status(201).json(nuevaCita);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ err: "Error al crear nueva cita" });
+    return res.status(500).json({ err: "Error al crear nueva cita" });
   }
 };
 
