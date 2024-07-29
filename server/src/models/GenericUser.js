@@ -7,6 +7,12 @@ const GenericUser = sequelize.define("genericUser", {
     primaryKey: true,
     autoIncrement: true,
   },
+  nombre: {
+    type: DataTypes.STRING,
+  },
+  apellido: {
+    type: DataTypes.STRING,
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,

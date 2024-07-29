@@ -7,7 +7,7 @@ const Prepagas = sequelize.define('prepagas',{
     primaryKey: true,
     autoIncrement: true,
   },
-  nombre: {
+  nombre_prepaga: {
     type: DataTypes.STRING,
   },
   nro_afiliado: {
