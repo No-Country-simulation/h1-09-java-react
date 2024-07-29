@@ -11,10 +11,44 @@ export const obtenerCitas = async (req, res) => {
 
 export const crearCita = async (req, res) => {
   try {
-    const nuevaCita = await Cita.create(req.body);
+    const {
+      idGenericUser,
+      idPersonal_medico,
+      fecha,
+      hora,
+      descripcion,
+      tipoDeConsulta,
+      ubicacion,
+      meetLink,
+    } = req.body;
+
+    if (
+      !idGenericUser ||
+      !idPersonal_medico ||
+      !fecha ||
+      !hora ||
+      !descripcion ||
+      !tipoDeConsulta ||
+      !ubicacion
+    ) {
+      return res.status(400).json({ err: "Faltan campos requeridos" });
+    }
+
+    const nuevaCita = await Cita.create({
+      idGenericUser,
+      idPersonal_medico,
+      fecha,
+      hora,
+      descripcion,
+      tipoDeConsulta,
+      ubicacion,
+      meetLink,
+    });
+
     return res.status(201).json(nuevaCita);
   } catch (err) {
-    return res.status(500).json({ err: "Error al crear nueva cita" });
+    console.log(err);
+    res.status(500).json({ err: "Error al crear nueva cita" });
   }
 };
 
