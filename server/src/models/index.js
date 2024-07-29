@@ -3,12 +3,13 @@ import Entidades from "./Entidades.js";
 import Especialidad from "./Especialidad.js";
 import Farmacia from "./Farmacia.js";
 import Financiadores from "./Financiadores.js";
-import GenericUser from "./genericUser.js";
+import GenericUser from "./GenericUser.js";
 import Laboratorio from "./Laboratorio.js";
 import Medicamento from "./Medicamento.js";
 import Paciente from "./Paciente.js";
 import Patologias from "./Patologias.js";
 import PersonalMedico from "./PersonalMedico.js";
+import Prepagas from "./Prepagas.js";
 import TipoDocumento from "./TipoDocumento.js";
 import Tratamiento from "./Tratamiento.js";
 
@@ -77,5 +78,13 @@ Cita.belongsTo(GenericUser, {
   targetKey: "idGenericUser",
 });
 GenericUser.hasMany(Cita, {
+  foreignKey: "idGenericUser",
+});
+
+// GenericUser --> Prepagas
+Prepagas.belongsTo(GenericUser, {
+  foreignKey: "idGenericUser",
+});
+GenericUser.hasMany(Prepagas, {
   foreignKey: "idGenericUser",
 });

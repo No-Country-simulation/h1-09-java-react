@@ -40,6 +40,10 @@ const User = sequelize.define("user", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  
+  profile_picture: {
+    type: DataTypes.STRING
+  }
 });
 
 export default User;
