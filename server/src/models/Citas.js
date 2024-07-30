@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
-import GenericUser from "./GenericUser.js";
 
 const Cita = sequelize.define("cita", {
   idCita: {
@@ -11,8 +10,8 @@ const Cita = sequelize.define("cita", {
   idGenericUser: {
     type: DataTypes.INTEGER,
     references: {
-      model: GenericUser,
-      key: "idGenericUser",
+      model: "paciente",
+      key: "idPaciente",
     },
   },
   idPersonal_medico: {

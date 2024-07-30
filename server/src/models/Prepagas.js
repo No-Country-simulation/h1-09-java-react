@@ -22,8 +22,8 @@ const Prepagas = sequelize.define('prepagas',{
   idGenericUser: {
     type: DataTypes.INTEGER,
     references: {
-      model: "genericUser",
-      key: "idGenericUser",
+      model: "paciente",
+      key: "idPaciente",
     },
   },
 });

@@ -8,7 +8,7 @@ const Especialidad = sequelize.define('especialidad', {
     autoIncrement: true,
   },
   tipo: {
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   }
 });
 
