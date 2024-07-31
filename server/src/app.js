@@ -30,7 +30,7 @@ app.use("/api", pacientesRouter);
 app.use("/api", uploadAccountRouter);
 app.use("/api", genericUserRouter);
 
-app.use('/api/v1/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));//Endpoint para la documentación
+app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));//Endpoint para la documentación
 
 app.get("/", (req, res) => {
   res.json({ status: "success" });
