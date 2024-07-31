@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import PhoneIcon from '../assets/PhoneIcon';
 import MessageIcon from '../assets/MessageIcon';
 import SuspensePoints from '../assets/SuspensePoints';
-import InfoIcon from '../assets/InfoIcon';
 import LayoutSidebar from '../layouts/layoutSidebar';
 import CardWithDate from '../components/card/CardWithDate';
 import Recipe from '../components/recipe/Recipe';
 import PatientInfo from '../components/patientInfo/PatientInfo';
 import AppointmentModal from '../components/modal/AppointmentModal';
 import ConfirmationModal from '../components/modal/ConfirmationModal';
+import FlipCard from '../components/card/FlipCard';
 import './Patients.css';
 import Statistics from '../components/molecules/Statistics';
 import Citas from '../components/yourAgenda/Citas';
-
 
 function Patients() {
   const [activeSection, setActiveSection] = useState('Tratamiento');
@@ -34,7 +33,7 @@ function Patients() {
       case 'Tratamiento':
         return <Statistics />;
       case 'Citas':
-        return <Citas/>;
+        return <Citas />;
       default:
         return <div>Contenido de {activeSection}</div>;
     }
@@ -115,32 +114,20 @@ function Patients() {
           </div>
 
           <div className="relative w-1/3 max-w-sm">
-            <div
-              className={`flip-card ${isCardFlipped ? 'flipped' : ''}`}
+            <FlipCard
+              frontTitle="● Post - Transplante"
+              frontSubtitle="Control bajo medicamentos"
+              backTitle="● Hernioplastia Inguinal"
+              backSubtitle="Fecha de la cirugía: 15 de febrero de 2024"
+              isFlipped={isCardFlipped}
               onClick={handleCardClick}
-            >
-              <div className="flip-card-inner">
-                <div className="flip-card-front h-[120px] bg-[#007CA0] inline-flex items-center justify-between p-6 rounded-xl text-white/90">
-                  <div className="flex flex-col justify-between h-full">
-                    <h3 className="font-semibold">● Post - Transplante</h3>
-                    <h4>Control bajo medicamentos</h4>
-                  </div>
-                  <InfoIcon />
-                </div>
-                <div className="flip-card-back h-[120px] bg-white p-6 border border-gray-200 rounded-xl shadow">
-                  <div className="flex flex-col justify-between h-full">
-                    <h3 className="text-[#007CA0] font-semibold">● Hernioplastia Inguinal</h3>
-                    <h4 className="text-[#007CA0]">Fecha de la cirugía: 15 de febrero de 2024</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
+            />
           </div>
         </article>
         <article className="w-full">
           <div className="font-semibold text-gray-700 border-b border-gray-300">
             <ul className="flex gap-8 ms-2">
-              {['Tratamiento', 'Citas' , 'Datos del paciente', 'Historial clinico'].map((section) => (
+              {['Tratamiento', 'Citas', 'Datos del paciente', 'Historial clinico'].map((section) => (
                 <li
                   key={section}
                   className={`nav-item ${activeSection === section ? 'active' : ''}`}

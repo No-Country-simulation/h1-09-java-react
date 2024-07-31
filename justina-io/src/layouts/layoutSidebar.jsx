@@ -160,7 +160,7 @@ const LayoutSidebar = ({ children }) => {
               <div>
                 <span className="ms-3  text-gray-900 dark:text-white group-hover:text-D0298A">Perfil</span>
               </div>
-              <Link>
+              <Link to='/editar-perfil'>
                 <div className='mt-3 '>
 
                   <li>
