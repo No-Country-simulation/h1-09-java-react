@@ -1,47 +1,37 @@
 openapi: 3.0.1
 info:
-  title: Palomazos API
-  description: API de la aplicación Palomazos que se encarga de gestionar la información de la base de datos en MySQL. Esta aplicación permite a las personas darse de alta con su correo electrónico y una contraseña para comentar y calificar películas.
+  title: Justina.io
+  description: API de la aplicación **_Justina.io_** que se encarga de gestionar la información de la base de datos en MySQL. Esta aplicación facilita y agiliza cada vez más el impacto exponencial en la salud de las personas.
   contact:
-    name: Equipo 21 Bedu
-    email: virtual.liga@gmail.com
+    name: H1-09-java-react
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-  - url: https://palomazos-api-a0bcbaa57f47.herokuapp.com/api/v1
+  - url: https://h1-09-java-react.onrender.com/api
     description: Servidor en Heroku (Prod)
-  - url: http://localhost:4005/api/v1
+  - url: http://localhost:8080/api
     description: Servidor local (Dev)
 tags:
-- name: users
-  description: Endpoint que maneja toda la información referente a los usuarios.
-- name: movies
-  description: Endpoint que maneja toda la información referente a las peliculas.
-# - name: reviews
-#   description: Endpoint que maneja toda la información referente a las reviews de las peliculas.
-# - name: comments
-#   description: Endpoint que maneja toda la información referente a comentarios de las películas. Un comentario no puede existir sin un review.
-
+  - name: pacientes
+    description: Endpoint que maneja toda la información referente a los pacientes.
 paths:
-  /users:
+  /pacientes/register:
     post:
-      security:
-        - bearerAuth: []
       tags:
-      - users
-      summary: Registro de usuario nuevo. Token requerido para ADMINS.
-      description: Permite a un usuario nuevo registrarse (sin token requerido). Los usuarios registrados con rol de administrador pueden registrar otros administradores, ocupan su token de seguridad.
+        - pacientes
+      summary: Registro de paciente nuevo.
+      description: Permite registar a un paciente nuevo. 
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/signupUser'
+              $ref: '#/components/schemas/signupPaciente'
         required: true
       responses:
           200:
-            description: Registro exitoso
+            description: Registro de paciente exitoso
             content:
               application/json:
                 schema:
@@ -54,154 +44,17 @@ paths:
             $ref: '#/components/responses/NotFound'
           500:
             $ref: '#/components/responses/ServerError'  
-    get:
-      security:
-        - bearerAuth: []
-      tags: 
-      - users
-      summary: Retorna una lista con todos los usuarios
-      description: Retorna un arreglo con todos los usuarios del sistema. Sólo Administradores pueden realizar esta operacion, por lo que se requiere JWT de seguridad que autentique su rol como ADMIN.
-      responses:
-        200:
-          description: Lista de usuarios obtenida exitosamente.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getUsers'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/ServerError'            
-    put:
-      security:
-        - bearerAuth: []
-      tags:
-      - users
-      summary: Usuario autenticado puede actualizar sus datos.
-      description: Permite a un usuario logueado modificar total o parcialmente sus datos por lo que se requiere su token de autenticacion.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateUser'
-        required: true
-      responses:
-          200:
-            description: Usuario actualizado exitosamente
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/updateExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-    delete:
-      security:
-        - bearerAuth: []
-      tags:
-      - users
-      summary: Usuario autenticado puede eliminar su cuenta.
-      description: Permite a un usuario logueado eliminar su cuenta de la aplicación. Este es una eliminacion logica, solo se marca una bandera como NO ACTIVO del usuario en la BD.
-      responses:
-          200:
-            description: Usuario eliminado exitosamente.
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/deleteExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-  /users/me:
-    get:
-      security:
-        - bearerAuth: []
-      tags: 
-      - users
-      summary: Usuario autenticado obtiene sus datos, y opcionalmente, sus reviews. Token requerido.
-      description: Retorna los datos del usuario, la busqueda es por `id`, pero si se envia el param `byEmail=true` la busqueda se hara por email. Ademas, si se agrega el query param `reviews=true` se envian tambien sus _Reviews_. JWT de seguridad requerido. 
-      parameters:
-        - in: query
-          name: reviews
-          schema:
-            type: boolean
-            example: false
-          description: Indica si se requieren todas sus reviews
-        - in: query
-          name: byemail
-          schema:
-            type: boolean
-            example: false
-          description: Buscar al usuario por su email
-      responses:
-        201:
-          description: Usuario obtenido exitosamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getUser'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/ServerError'    
-    # get:
-    #   security:
-    #     - bearerAuth: []
-    #   tags: 
-    #   - users
-    #   summary: Usuario autenticado obtiene sus datos mediante su email registrado. Token requerido.
-    #   description: Retorna datos del usuario que coincida con el EMAIL del Token. JWT de seguridad requerido. Si se agrega el query param 'byemail' en true, se envian sus Reviews. JWT de seguridad requerido. 
-    #   parameters:
-    #     - in: query
-    #       name: byemail
-    #       schema:
-    #         type: boolean
-    #         example: false
-    #       description: Indica si se requieren todas sus reviews
-    #   responses:
-    #     200:
-    #       description: Usuario obtenido exitosamente por su email
-    #       content:
-    #         application/json:
-    #           schema:
-    #             $ref: '#/components/schemas/getUserByEmail'
-    #     400:
-    #       $ref: '#/components/responses/BadRequest'
-    #     401:
-    #       $ref: '#/components/responses/Unauthorized'
-    #     404:
-    #       $ref: '#/components/responses/NotFound'
-    #     500:
-    #       $ref: '#/components/responses/ServerError'          
-  /users/auth:
+  /pacientes/login:
     post:
       tags:
-      - users
-      summary: Inicio de sesión y autenticado de usuario
-      description: Permite a un usuario registrado iniciar sesión y obtener un token de seguridad. 
+        - pacientes
+      summary: Inicio de sesión y autenticación de pacientes
+      description: Permite a un paciente registrado iniciar sesión y obtener un token de seguridad. 
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/loginUser'
+              $ref: '#/components/schemas/loginPaciente'
         required: true
       responses:
           200:
@@ -218,284 +71,6 @@ paths:
             $ref: '#/components/responses/NotFound'
           500:
             $ref: '#/components/responses/ServerError'
-    put:
-      security:
-        - bearerAuth: []
-      tags:
-      - users
-      summary: Usuario autenticado puede cambiar su password.
-      description: Permite a un usuario logueado cambiar su password. Es necesario enviar su password actual.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/changeUserPassword'
-        required: true
-      responses:
-          200:
-            description: Usuario actualizado exitosamente
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/changeUserPasswordExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-  /movies/create:
-    post:
-      security:
-        - bearerAuth: []
-      tags:
-      - movies
-      summary: Crear pelicula nueva
-      description: Permite a un usuario crar una pelicula. 
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createMovie'
-        required: true
-      responses:
-          200:
-            description: Registro exitoso
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/creacionExitosa'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-  /movies:
-    get:
-      security:
-        - bearerAuth: []
-      tags: 
-        - movies
-      summary: Retorna una lista con todas las peliculas.
-      description: Retorna un arreglo con todas las peliculas del sistema. Si se agrega el _query param_ `reviews=true`, se envian sus Reviews. JWT de seguridad requerido. 
-      parameters:
-        - in: query
-          name: reviews
-          schema:
-            type: boolean
-            example: false
-          description: Indica si se requieren todas sus reviews
-      responses:
-        200:
-          description: Lista de peliculas obtenida exitosamente.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getMovies'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/ServerError'
-  /movies/title/{title}:
-    get:
-     security:
-      - bearerAuth: []
-     tags:
-      - movies 
-     summary: Retorna una lista de todas las películas que coinciden con la búsqueda.
-     description: Retorna un arreglo con todas las películas del sistema que coincidan con el título buscado.
-     parameters:
-      - in: path
-        name: title
-        schema:
-          type: string
-        required: true
-        description: Titulo de la pelicula
-     responses:
-        200:
-          description: Resultados encontrados exitosamente.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getMovieByTitle'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/ServerError'
-  /movies/year/{year}:
-    get:
-      security:
-      - bearerAuth: []
-      tags:
-      - movies 
-      summary: Retorna una lista de todas las películas que coinciden con el año buscado.
-      description: Retorna un arreglo con todas las películas del sistema que coincidan con el año buscado.
-      parameters:
-        - in: path
-          name: year
-          schema:
-            type: integer
-          required: true
-          description: Año de la pelicula
-      responses:
-          200:
-            description: Resultados encontrados exitosamente.
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/getMovieByTitle'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-  /movies/{id}:
-    get:
-      security:
-      - bearerAuth: []
-      tags:
-      - movies 
-      summary: Retorna la pelicula que coincide con el Id buscado.
-      description: Retorna un arreglo con todas las películas del sistema que coincidan con el id buscado.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-        description: ID de la pelicula
-      responses:
-          200:
-            description: Resultados encontrados exitosamente.
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/getMovieById'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-    put:
-      security:
-        - bearerAuth: []
-      tags:
-      - movies
-      summary: Usuario autenticado puede actualizar datos de una película.
-      description: Permite a un usuario logueado actualizar datos de una película.
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: ID de la pelicula
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateMovie'
-        required: true
-      responses:
-          200:
-            description: Usuario actualizado exitosamente
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/changeUserPasswordExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-    delete:
-      security:
-        - bearerAuth: []
-      tags:
-      - movies
-      summary: Usuario autenticado puede eliminar una película.
-      description: Permite a un usuario logueado eliminar una película de la aplicación. Este es una eliminacion logica, solo se marca una bandera como NO ACTIVO de la película en la BD.
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: ID de la pelicula
-      responses:
-          200:
-            description: Película eliminada exitosamente.
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/deleteMovieExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'            
-  /movies/{id}/reviews:
-    post:
-      security:
-        - bearerAuth: []
-      tags:
-      - movies
-      summary: Registra una Review de una pelicula. Token requerido
-      description: Permite a un usuario autenticado realizar un Review a una pelicula elegida mediante su ID, calificarla del 1 al 5, agregar palomita o tacha y, opcionalmente, agregar un comentario.
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: ID de la pelicula
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createMovieReview'
-        required: true
-      responses:
-          200:
-            description: Review creado exitosamente
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/createMovieReviewExitoso'
-          400:
-            $ref: '#/components/responses/BadRequest'
-          401:
-            $ref: '#/components/responses/Unauthorized'
-          404:
-            $ref: '#/components/responses/NotFound'
-          500:
-            $ref: '#/components/responses/ServerError'
-
 
 #Para referenciar y no volver a escribirlos
 components:
@@ -526,67 +101,145 @@ components:
         type: string
   
   schemas:
-    signupUser:
+    signupPaciente:
       type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      - password
-      - confirmpassword
+      # required:
+      # - firstName
+      # - lastName
+      # - email
+      # - password
+      # - confirmpassword
       properties:
-        firstName:
-          type: string
-          example: invitado
-        lastName:
-          type: string
-          example: guess
         email:
           type: string
           example: guess@none.com
         password:
           type: string
           example: unpasswordcualquiera
-        confirmPassword:
+        ciudad:
           type: string
-          example: unpasswordcualquiera
+          example: Buenos Aires
+        edad:
+          type: number
+          example: 20
+        peso:
+          type: number
+          example: 65.5
+        grupo_sanguineo:
+          type: string
+          example: O-
+        genero:
+          type: string
+          example: M
+        altura:
+          type: number
+          example: 1.75
+        alergias:
+          type: string
+          example: Oxycodon
+        telefono:
+          type: string
+          example: 5555001111
+        direccion:
+          type: string
+          example: Av. Siempre Viva 332
+        contacto_familiar_telefono:
+          type: string
+          example: 5555001122
+        contacto_familiar_relacion:
+          type: string
+          example: Madre
+        nombre: 
+          type: string
+          example: Juan Perez
+        nro_afiliado:
+          type: string
+          example: 98765
+        plan: 
+          type: string
+          example: Basico
+        fecha_vencimiento:
+          type: string
+          example: 12/10/2024
     signupExitoso:
       type: object
       properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 201
+        status:
+          type: string
+          example: success
         message:
           type: string
-          example: Usuario creado exitosamente
+          example: Paciente creado exitosamente
         data:
           type: object
-          required:
-          - id
-          - firstName
-          - lastName
-          - email
-          - role
           properties:
-            id:
-              type: number
-              example: 1
-            firstName:
-              type: string
-              example: invitado
-            lastName:
-              type: string
-              example: guess
-            email:
-              type: string
-              example: guess@none.com
-            role:
-              type: string
-              example: USER
-    loginUser:
+            paciente:
+              type: object
+              properties:
+                idGenericUser:
+                  type: number
+                  example: 1
+                email:
+                  type: string
+                  example: guess@none.com
+                password:
+                  type: string
+                  example: unpasswordcualquiera
+                ciudad:
+                  type: string
+                  example: Buenos Aires
+                edad:
+                  type: number
+                  example: 20
+                peso:
+                  type: number
+                  example: 65.5
+                grupo_sanguineo:
+                  type: string
+                  example: O-
+                genero:
+                  type: string
+                  example: M
+                altura:
+                  type: number
+                  example: 1.75
+                alergias:
+                  type: string
+                  example: Oxycodon
+                telefono:
+                  type: string
+                  example: 5555001111
+                direccion:
+                  type: string
+                  example: Av. Siempre Viva 332
+                contacto_familiar_telefono:
+                  type: string
+                  example: 5555001122
+                contacto_familiar_relacion:
+                  type: string
+                  example: Madre
+                createddAt: 
+                  type: string
+                  example: 2024-07-31
+                updatedAt: 
+                  type: string
+                  example: 2024-07-31
+            prepaga:
+              type: object
+              properties:
+                idPrepagas:
+                  type: number
+                  example: 2
+                idGenericUser:
+                  type: number
+                  example: 1
+                createddAt: 
+                  type: string
+                  example: 2024-07-31
+                updatedAt: 
+                  type: string
+                  example: 2024-07-31
+    loginPaciente:
       type: object
       required:
       - email
@@ -625,406 +278,6 @@ components:
             token:
               type: string
               example: my_token_characters
-    getUser:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Usuario obtenido exitosamente
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            firstName:
-              type: string
-              example: invitado 
-            lastName:
-              type: string
-              example: guess
-            email:
-              type: string
-              example: guess@none.com
-            role:
-              type: string
-              example: USER
-    getUserByEmail:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Usuario obtenido exitosamente por su email
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            firstName:
-              type: string
-              example: invitado 
-            lastName:
-              type: string
-              example: guess
-            email:
-              type: string
-              example: guess@none.com
-            role:
-              type: string
-              example: USER
-    getUsers:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 
-        message:
-          type: string
-          example: Lista de usuarios obtenida exitosamente
-        usuarios:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                example: 1
-              firstName:
-                type: string
-                example: invitado 
-              lastName:
-                type: string
-                example: guess
-              email:
-                type: string
-                example: guess@none.com
-              role:
-                type: string
-                example: USER
-    updateUser:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: invitado
-        lastName:
-          type: string
-          example: guess
-    updateExitoso:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Usuario actualizado exitosamente
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            firstName:
-              type: string
-              example: mi_nuevo_nombre
-            lastName:
-              type: string
-              example: mi_nuevo_apellido
-            email:
-              type: string
-              example: guess@none.com
-            role:
-              type: string
-              example: USER
-    deleteExitoso:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-           type: number
-           example: 200
-        message:
-          type: string
-          example: Usuario eliminado exitosamente
-        data: 
-          type: object
-          example: null
-    changeUserPassword:
-      type: object
-      required:
-      - password
-      - newPassword
-      properties:
-        password:
-          type: string
-          example: 54321abc
-        newPassword:
-          type: string
-          example: abc54321
-    changeUserPasswordExitoso:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Login exitoso!
-        data:
-          type: object
-          example: null
-    createMovie:
-      type: object
-      required:
-      - id
-      - title
-      - year
-      properties:
-        id:
-          type: number
-          example: 1
-        title:
-          type: string
-          example: oppenheimer
-        year:
-          type: number
-          example: 2023
-    creacionExitosa:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 201
-        message:
-          type: string
-          example: Usuario creado exitosamente
-        data:
-          type: object
-          required:
-          - id
-          - firstName
-          - lastName
-          - email
-          - role
-          properties:
-            id:
-             type: number
-             example: 1
-            title:
-             type: string
-             example: oppenheimer
-            year:
-             type: number
-             example: 2023
-    getMovies:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 
-        message:
-          type: string
-          example: Lista de peliculas obtenida exitosamente
-        movies:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                example: 1
-              Title:
-                type: string
-                example: oppenheimer
-              year:
-                type: number
-                example: 2023
-    getMovieByTitle:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Pelicula obtenida exitosamente.
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            Title:
-              type: string
-              example: oppenheimer
-            year:
-              type: number
-              example: 2023
-    getMovieByYear:
-      type: object
-      properties:
-        error:
-          type: number
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Pelicula obtenida exitosamente.
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            Title:
-              type: string
-              example: oppenheimer
-            year:
-              type: number
-              example: 2023
-    getMovieById:
-      type: object
-      properties:
-        error:
-          type: number
-          example: false
-        code:
-          type: number
-          example: 200
-        message:
-          type: string
-          example: Pelicula obtenida exitosamente.
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            Title:
-              type: string
-              example: oppenheimer
-            year:
-              type: number
-              example: 2023
-    updateMovie:
-      type: object
-      required:
-      - title
-      - year
-      properties:
-        title:
-          type: string
-          example: oppenheimer
-        newTitle:
-          type: string
-          example: barbie
-        year:
-          type: number
-          example: 2023
-        newYear:
-          type: number
-          example: 2024
-    deleteMovieExitoso:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-           type: number
-           example: 200
-        message:
-          type: string
-          example: Pelicula eliminadaexitosamente
-        data: 
-          type: object
-          example: null
-    createMovieReview:
-      type: object
-      required:
-      - rate
-      properties:
-        rate:
-          type: number
-          example: 4
-        isCheck:
-          type: boolean
-          example: true
-        comment:
-          type: object
-          properties:
-            content:
-              type: string
-              example: Una gran pelicula, emocionante de principio a fin.
-    createMovieReviewExitoso:
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: false
-        code:
-          type: number
-          example: 201
-        message:
-          type: string
-          example: Review creado exitosamente
-        data:
-          type: object
-          properties:
-            id:
-              type: number
-              example: 1
-            rate:
-              type: number
-              example: 4
-            isCheck:
-              type: boolean
-              example: true
-            user_id:
-              type: number
-              example: 1
-            movie_id:
-              type: number
-              example: 980489
-            comment:
-              type: object
-              properties:
-                id:
-                  type: number
-                  example: 1
-                content:
-                  type: string
-                  example: Una gran pelicula, emocionante de princio a fin
           
   securitySchemes:
     bearerAuth:        
