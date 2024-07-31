@@ -28,7 +28,8 @@ const routes = createBrowserRouter([
   },
   {
     path: '/editar-perfil',
-    element: <EditProfile />,
+    element: <EditProfile /> 
+  ,
   },
   {
     path: '/recuperacion',
