@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
 import passport from "./middlewares/passport.middleware.js";
+import swaggerUi from "swagger-ui-express";
 
 import authRoute from "./router/auth.routes.js";
 import citasRouter from "./router/citas.routes.js";
 import pacientesRouter from "./router/pacientes.routes.js";
 import uploadAccountRouter from "./router/updateProfile.route.js";
 import genericUserRouter from "./router/genericUser.routes.js";
+import swaggerDocument from "../swagger.json" assert { type: "json" };
 
 dotenv.config();
 
@@ -27,6 +29,8 @@ app.use("/api", citasRouter);
 app.use("/api", pacientesRouter);
 app.use("/api", uploadAccountRouter);
 app.use("/api", genericUserRouter);
+
+app.use('/api/v1/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));//Endpoint para la documentación
 
 app.get("/", (req, res) => {
   res.json({ status: "success" });
