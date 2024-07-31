@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LayoutsNav from './LayoutsNav';
 
-const LayoutSidebar = ({ children }) => {
+const LayoutSidebar = ({ children = '' }) => {
   return (
     <>
       <LayoutsNav />
@@ -18,7 +18,7 @@ const LayoutSidebar = ({ children }) => {
               <Link to='/'>
                 <div className='mt-3'>
                   <li>
-                    <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container">
+                    <span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container">
                       <svg
                         className="w-6 h-6 text-gray-800 dark:text-white icon-default group-hover:text-D0298A"
                         aria-hidden="true"
@@ -37,14 +37,14 @@ const LayoutSidebar = ({ children }) => {
                         />
                       </svg>
                       <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Inicio</span>
-                    </a>
+                    </span>
                   </li>
                 </div>
               </Link>
               <Link>
 
                 <li>
-                  <a
+                  <span
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                   >
                     <svg
@@ -61,13 +61,13 @@ const LayoutSidebar = ({ children }) => {
                         d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                     </svg>
                     <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Notificaciones</span>
-                  </a>
+                  </span>
                 </li>
               </Link>
               <Link>
 
                 <li className='mb-4'>
-                  <a
+                  <span
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                   >
                     <svg
@@ -84,7 +84,7 @@ const LayoutSidebar = ({ children }) => {
                         d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
                     </svg>
                     <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Mensajes</span>
-                  </a>
+                  </span>
                 </li>
               </Link>
               <div>
@@ -93,7 +93,7 @@ const LayoutSidebar = ({ children }) => {
               <Link>
                 <div className='mt-5 mb-2'>
                   <li>
-                    <a
+                    <span
                       className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                     >
                       <svg
@@ -110,14 +110,14 @@ const LayoutSidebar = ({ children }) => {
                           d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                       </svg>
                       <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Agenda</span>
-                    </a>
+                    </span>
                   </li>
                 </div>
               </Link>
               <Link to='/pacientes'>
 
                 <li className='mb-4'>
-                  <a
+                  <span
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                   >
                     <svg className="w-6 h-6 text-gray-800 dark:text-white icon-default group-hover:text-D0298A"
@@ -126,7 +126,7 @@ const LayoutSidebar = ({ children }) => {
                     </svg>
 
                     <span className="ms-3  text-gray-900 dark:text-white group-hover:text-D0298A">Pacientes</span>
-                  </a>
+                  </span>
                 </li>
               </Link>
               <div>
@@ -136,7 +136,7 @@ const LayoutSidebar = ({ children }) => {
               <Link>
                 <div className='mt-3 '>
                   <li className='mb-4'>
-                    <a
+                    <span
                       className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                     >
                       <svg
@@ -153,7 +153,7 @@ const LayoutSidebar = ({ children }) => {
                           d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                       </svg>
                       <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Estadísticas</span>
-                    </a>
+                    </span>
                   </li>
                 </div>
               </Link>
@@ -164,7 +164,7 @@ const LayoutSidebar = ({ children }) => {
                 <div className='mt-3 '>
 
                   <li>
-                    <a
+                    <span
                       className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                     >
                       <svg
@@ -182,14 +182,14 @@ const LayoutSidebar = ({ children }) => {
                       </svg>
 
                       <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Perfil</span>
-                    </a>
+                    </span>
                   </li>
                 </div>
               </Link>
               <Link>
 
                 <li>
-                  <a
+                  <span
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group icon-container"
                   >
                     <svg className="w-6 h-6 text-gray-800 dark:text-white icon-default group-hover:text-D0298A"
@@ -198,7 +198,7 @@ const LayoutSidebar = ({ children }) => {
                     </svg>
 
                     <span className="ms-3 text-gray-900 dark:text-white group-hover:text-D0298A">Configuracion</span>
-                  </a>
+                  </span>
                 </li>
               </Link>
             </ul>
