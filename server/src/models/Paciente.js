@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
 import Cita from "./Citas.js";
+import ContactoPaciente from "./ConctactoPaciente.js";
+import ContactoFamiliar from "./ContactoFamiliar.js";
 import PersonalMedico from "./PersonalMedico.js";
 import TipoDocumento from "./TipoDocumento.js";
 import Tratamiento from "./Tratamiento.js";
@@ -57,6 +59,21 @@ const Paciente = sequelize.define("paciente", {
     type: DataTypes.INTEGER,
     references: {
       model: Cita,
+      key: "idCita",
+    },
+  },
+  idContactoPaciente: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: ContactoPaciente,
+      key: "idContactoPaciente",
+    },
+  },
+  idContacto_Familiar: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: ContactoFamiliar,
+      key: "idContacto_Familiar",
     },
   },
   nombre: {
@@ -76,6 +93,21 @@ const Paciente = sequelize.define("paciente", {
   },
   factor_sanguineo: {
     type: DataTypes.INTEGER,
+  },
+  edad: {
+    type: DataTypes.INTEGER,
+  },
+  peso: {
+    type: DataTypes.INTEGER,
+  },
+  altura: {
+    type: DataTypes.INTEGER,
+  },
+  genero: {
+    type: DataTypes.STRING(10),
+  },
+  alergias: {
+    type: DataTypes.STRING,
   },
 });
 
