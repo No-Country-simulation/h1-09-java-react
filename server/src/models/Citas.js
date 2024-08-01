@@ -1,51 +1,51 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/index.js";
-import GenericUser from "./GenericUser.js";
+import {EstadoCita, MotivoConsulta, TipoConsulta} from "../interfaces/interfaces.js";
 
 const Cita = sequelize.define("cita", {
-  idCita: {
-    type: DataTypes.INTEGER,
+  id: {
+    type: DataTypes.BIGINT,
     primaryKey: true,
     autoIncrement: true,
   },
-  idGenericUser: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: GenericUser,
-      key: "idGenericUser",
-    },
-  },
-  idPersonal_medico: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "personal_medico",
-      key: "idPersonal_medico",
-    },
-  },
-  fecha: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  hora: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  descripcion: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   tipoDeConsulta: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM(...Object.values(TipoConsulta)),
     allowNull: false,
   },
-  ubicacion: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  meetLink: {
+  ubicacion: { // Si es presencial
     type: DataTypes.STRING,
     allowNull: true,
   },
+  telefono: { // Si es llamada
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  meetLink: { // Si es videoconferencia
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  motivo: {
+    type: DataTypes.ENUM(...Object.values(MotivoConsulta)),
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.ENUM(...Object.values(EstadoCita)),
+    allowNull: false,
+  },
+  comentarios: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  activo: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+  },
+},
+{
+  sequelize,
+  modelName: "cita",
+  timestamps: true,
 });
 
 export default Cita;

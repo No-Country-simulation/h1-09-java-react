@@ -11,6 +11,11 @@ import pacientesRouter from "./router/pacientes.routes.js";
 import uploadAccountRouter from "./router/updateProfile.route.js";
 import genericUserRouter from "./router/genericUser.routes.js";
 import swaggerDocument from "../swagger.json" assert { type: "json" };
+import { handleErrorJoi } from "./middlewares/errors/validation-error.js";
+import { unknownError } from "./middlewares/errors/unknown-error.js";
+import { hikariConfig } from "./config/index.js";
+
+console.log(hikariConfig);
 
 dotenv.config();
 
@@ -31,6 +36,10 @@ app.use("/api", uploadAccountRouter);
 app.use("/api", genericUserRouter);
 
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));//Endpoint para la documentación
+
+//Uso de middlewares para manejar errores
+app.use( handleErrorJoi );
+app.use( unknownError );
 
 app.get("/", (req, res) => {
   res.json({ status: "success" });

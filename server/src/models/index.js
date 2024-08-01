@@ -69,8 +69,8 @@ Tratamiento.hasMany(Medicamento, { foreignKey: "idTratamiento" });
 Medicamento.belongsTo(Farmacia, { foreignKey: "idFarmacia" });
 Farmacia.hasMany(Medicamento, { foreignKey: "idFarmacia" });
 //Paciente --> Cita
-Paciente.belongsTo(Cita, { foreignKey: "idCita", targetKey: "idCita" });
-Cita.hasMany(Paciente, { foreignKey: "idCita", sourceKey: "idCita" });
+Paciente.belongsTo(Cita, { foreignKey: "idCita" }); //{ foreignKey: "idCita", targetKey: "idCita" }
+Cita.hasMany(Paciente, { foreignKey: "idCita" }); //{ foreignKey: "idCita", sourceKey: "idCita" }
 
 //Cita --> Personal_medico
 Cita.belongsTo(PersonalMedico, {
