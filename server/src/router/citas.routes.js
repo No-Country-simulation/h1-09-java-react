@@ -24,8 +24,8 @@ router.get("/citas/medico/:idMedico/paciente/:idPaciente", obtenerCitasPorMedico
 router.get("/citas/medico/:idMedico", obtenerCitasPorMedico);
 router.get("/citas/paciente/:idPaciente", obtenerCitasPorPaciente);
 
-router.get("/citas", obtenerCitas);
-router.get("/citas/:id", obtenerCitaById);
+// router.get("/citas", obtenerCitas);
+// router.get("/citas/:id", obtenerCitaById);
 router.delete("/citas/:id", eliminarCita);
 
 export default router;
