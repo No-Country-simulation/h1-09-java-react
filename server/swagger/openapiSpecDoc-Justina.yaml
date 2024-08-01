@@ -9,8 +9,10 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
+  - url: https://justina-io-api-9a1d439a2f95.herokuapp.com/api
+    description: Servidor en Heroku (Prod1)
   - url: https://h1-09-java-react.onrender.com/api
-    description: Servidor en Heroku (Prod)
+    description: Servidor en Render (Prod2)
   - url: http://localhost:8080/api
     description: Servidor local (Dev)
 tags:
