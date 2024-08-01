@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -15,9 +16,28 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Aquí es donde agregarás la lógica de autenticación
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch('https://h1-09-java-react.onrender.com/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+      // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
+      navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      // Maneja los errores de autenticación aquí
+    }
   };
 
   return (
