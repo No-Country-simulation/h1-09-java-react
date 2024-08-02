@@ -76,11 +76,25 @@ const Paciente = sequelize.define("paciente", {
       key: "idContacto_Familiar",
     },
   },
+
   nombre: {
     type: DataTypes.STRING(20),
   },
   apellido: {
     type: DataTypes.STRING(15),
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  ciudad: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   n_de_documento: {
     type: DataTypes.INTEGER,
@@ -108,6 +122,28 @@ const Paciente = sequelize.define("paciente", {
   },
   alergias: {
     type: DataTypes.STRING,
+  },
+  telefono: {
+    type: DataTypes.INTEGER,
+  },
+  direccion: {
+    type: DataTypes.STRING,
+  },
+  contacto_familiar_telefono: {
+    type: DataTypes.INTEGER,
+  },
+  contacto_familiar_relacion: {
+    type: DataTypes.STRING,
+  },
+  profile_picture: {
+    type: DataTypes.STRING,
+  },
+  idPrepaga: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "prepagas",
+      key: "idPrepagas",
+    },
   },
 });
 
