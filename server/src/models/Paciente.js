@@ -55,13 +55,13 @@ const Paciente = sequelize.define("paciente", {
       key: "idTipo_Documento",
     },
   },
-  idCita: {
+  /*idCita: {
     type: DataTypes.INTEGER,
     references: {
       model: Cita,
       key: "idCita",
     },
-  },
+  },*/
   idContactoPaciente: {
     type: DataTypes.INTEGER,
     references: {

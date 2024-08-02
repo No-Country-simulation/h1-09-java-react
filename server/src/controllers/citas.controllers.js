@@ -1,4 +1,10 @@
 import Cita from "../models/Citas.js";
+import {
+  createCita,
+  obtenerCitasPorMedicoPacienteService,
+  obtenerCitasPorMedicoService,
+  obtenerCitasPorPacienteService
+} from "../services/citas.services.js";
 
 export const obtenerCitas = async (req, res) => {
   try {
@@ -6,49 +12,6 @@ export const obtenerCitas = async (req, res) => {
     return res.json(citas);
   } catch (err) {
     return res.status(500).json({ err: "Error al obtener las citas" });
-  }
-};
-
-export const crearCita = async (req, res) => {
-  try {
-    const {
-      idGenericUser,
-      idPersonal_medico,
-      fecha,
-      hora,
-      descripcion,
-      tipoDeConsulta,
-      ubicacion,
-      meetLink,
-    } = req.body;
-
-    if (
-      !idGenericUser ||
-      !idPersonal_medico ||
-      !fecha ||
-      !hora ||
-      !descripcion ||
-      !tipoDeConsulta ||
-      !ubicacion
-    ) {
-      return res.status(400).json({ err: "Faltan campos requeridos" });
-    }
-
-    const nuevaCita = await Cita.create({
-      idGenericUser,
-      idPersonal_medico,
-      fecha,
-      hora,
-      descripcion,
-      tipoDeConsulta,
-      ubicacion,
-      meetLink,
-    });
-
-    return res.status(201).json(nuevaCita);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ err: "Error al crear nueva cita" });
   }
 };
 
@@ -61,6 +24,7 @@ export const obtenerCitaById = async (req, res) => {
       return res.status(404).json({ err: "Cita no encontrada" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ err: "Error al econtrar la cita " });
   }
 };
@@ -78,3 +42,67 @@ export const eliminarCita = async (req, res) => {
     return res.status(500).json({ error: "Error al encontrar la cita" });
   }
 };
+
+export const crearCita = async (req, res, next) => {
+  try {
+    const body = req.body;
+    const nuevaCita = await createCita(body);
+
+    return res.status(201).json({
+      error: false,
+      code: 201,
+      message: "Cita creada exitosamente",
+      data: nuevaCita
+    })
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const obtenerCitasPorMedicoPaciente = async (req, res, next) => {
+    try {
+        const citas = await obtenerCitasPorMedicoPacienteService(req.params.idMedico, req.params.idPaciente);
+
+      return res.status(201).json({
+        error: false,
+        code: 201,
+        message: "Citas obtenidas exitosamente",
+        data: citas
+      })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const obtenerCitasPorMedico = async (req, res, next) => {
+  try {
+    const citas = await obtenerCitasPorMedicoService(req.params.idMedico, );
+
+    return res.status(201).json({
+      error: false,
+      code: 201,
+      message: "Citas obtenidas exitosamente",
+      data: citas
+    })
+
+  } catch (err) {
+    next(err);
+  }
+}
+
+export const obtenerCitasPorPaciente = async (req, res, next) => {
+  try {
+    const citas = await obtenerCitasPorPacienteService(req.params.idPaciente);
+
+    return res.status(201).json({
+      error: false,
+      code: 201,
+      message: "Citas obtenidas exitosamente",
+      data: citas
+    })
+
+  } catch (err) {
+    next(err);
+  }
+}
