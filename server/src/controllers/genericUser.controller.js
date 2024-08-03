@@ -1,5 +1,5 @@
 import GenericUser from "../models/GenericUser.js";
-import { createUser, getGenericUserByEmail } from "../services/genericUser.services.js";
+import { createPaciente, getPacienteByEmail } from "../services/paciente.services.js";
 import cloudinary from "../utils/cloudinary.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/jwt.js";
@@ -7,7 +7,7 @@ import { generateToken } from "../utils/jwt.js";
 export const register = async (req, res) => {
   try {
     const data = req.body;
-    const user = await createUser(data);
+    const user = await createPaciente(data);
     return res.status(200).json({ status: 'success', message: 'Usuario creado', data: user })
   } catch (error) {
     return res.status(400).json({ error: error.message });
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
       };
     }
     
-    const user = await getGenericUserByEmail(email);
+    const user = await getPacienteByEmail(email);
     if (!user) {
       res.status(400);
       throw {

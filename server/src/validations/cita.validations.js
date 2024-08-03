@@ -13,7 +13,7 @@ const objectCreateCita = {
                 'number.positive': 'El id del medico debe ser un número entero positivo',
                 'any.required': 'El id del medico es un campo requerido'
             }),
-    idGenericUser:
+    idPaciente:
         Joi.number()
             .integer()
             .positive()

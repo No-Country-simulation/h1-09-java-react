@@ -1,6 +1,7 @@
 import Cita from "../models/Citas.js";
 import PersonalMedico from "../models/PersonalMedico.js";
 import GenericUser from "../models/GenericUser.js";
+import Paciente from "../models/Paciente.js";
 
 const createCita = ( cita ) => {
     return Cita.create( cita );
@@ -9,8 +10,8 @@ const createCita = ( cita ) => {
 const obtenerCitasPorMedicoPacienteService = (idMedico, idPaciente ) => {
     return Cita.findAll({
         where: {
-            idPersonal_medico: idMedico,
-            idGenericUser: idPaciente
+            idPaciente: idPaciente,
+            idPersonal_medico: idMedico
         }
     });
 }
@@ -22,8 +23,8 @@ const obtenerCitasPorMedicoService = (idMedico) => {
         },
         include: [
             {
-                model: GenericUser,
-                as: "genericUser"
+                model: Paciente,
+                as: "paciente"
             }
         ]
     });
@@ -32,7 +33,7 @@ const obtenerCitasPorMedicoService = (idMedico) => {
 const obtenerCitasPorPacienteService = (idPaciente) => {
     return Cita.findAll({
         where: {
-            idGenericUser: idPaciente
+            idPaciente: idPaciente
         },
         include: [
             {

@@ -1,63 +1,66 @@
 import Paciente from "../models/Paciente.js";
-import {createUser, getGenericUserByEmail} from "../services/genericUser.services.js";
-import GenericUser from "../models/GenericUser.js";
+import {createPaciente, getPacienteByEmail} from "../services/paciente.services.js";
 import bcrypt from "bcrypt";
 import {generateToken} from "../utils/jwt.js";
 import cloudinary from "../utils/cloudinary.js";
 
-export const obtenerPacientes = async (req, res) => {
+export const obtenerPacientes = async (req, res, next) => {
   try {
     const pacientes = await Paciente.findAll();
-    return res.json(pacientes);
+    return res.status(200).json(pacientes);
   } catch (err) {
-    return res.status(500).json({ err: "Error al obtener los pacientes " });
+    console.error(err);
+    next(err);
   }
 };
 
-export const obtenerPacientesById = async (req, res) => {
+export const obtenerPacientesById = async (req, res, next) => {
   try {
     const paciente = await Paciente.findByPk(req.params.id);
     if (paciente) {
-      return res.json(paciente);
+      return res.status(200).json(paciente);
     } else {
-      return res.status(404).json({ err: "Paciente no encontrado" });
+      return res.status(204).json({ err: "Paciente no encontrado" });
     }
   } catch (err) {
-    return res.status(500).json({ err: "Error al obtener al paciente" });
+    console.error(err);
+    next(err);
   }
 };
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const data = req.body;
-    const user = await createUser(data);
-    return res.status(200).json({ status: 'success', message: 'Usuario creado', data: user })
+    const paciente = await createPaciente(data);
+    return res.status(200).json({ status: 'success', message: 'Paciente creado', data: paciente })
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    console.error(error);
+    next(error);
   }
 };
 
-export const updateProfile = async (req, res) => {
+export const updateProfile = async (req, res, next) => {
   try {
     const data  = req.body;
 
     if (data === undefined || Object.keys(data).length === 0 || data === null) return res.status(400).json({ message: "Se necesita un valor" });
 
-    await GenericUser.update(data,
+    await Paciente.update(data,
         {
           where: {
-            idGenericUser: req.user.idGenericUser
+            idPaciente: req.user.idPaciente
           }
         }
     )
 
     return res.status(200).json({ status: 'success', message: 'Perfil actualizado'});
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message })
+    console.error(error);
+    next(error);
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -69,7 +72,7 @@ export const login = async (req, res) => {
       };
     }
 
-    const user = await getGenericUserByEmail(email);
+    const user = await getPacienteByEmail(email);
     if (!user) {
       res.status(400);
       throw {
@@ -102,11 +105,12 @@ export const login = async (req, res) => {
       data
     })
   } catch (err) {
-    return res.json(err);
+    console.error(err);
+    next(err);
   }
 };
 
-export const updatePatientProfileImage = async (req, res) => {
+export const updatePatientProfileImage = async (req, res, next) => {
   try {
     let secure_url;
     if (!req.file) return res.status(400).send("Por favor seleccione una imagen para subir");
@@ -118,17 +122,18 @@ export const updatePatientProfileImage = async (req, res) => {
       if (error) throw error;
 
       secure_url = result.secure_url;
-      await GenericUser.update({
+      await Paciente.update({
         profile_picture: secure_url
       }, {
         where: {
-          idGenericUser: req.user.idGenericUser
+          idPaciente: req.user.idPaciente
         }
       })
     }).end(buffer);
 
-    return res.status(200).json({ message: "Foto de perfial actualizada" })
+    return res.status(200).json({ message: "Foto de perfil actualizada" })
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    console.error(error);
+    next(error);
   }
 };

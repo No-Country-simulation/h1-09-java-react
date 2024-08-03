@@ -106,7 +106,7 @@ const Paciente = sequelize.define("paciente", {
     type: DataTypes.INTEGER,
   },
   factor_sanguineo: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   edad: {
     type: DataTypes.INTEGER,

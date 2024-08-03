@@ -69,8 +69,16 @@ Tratamiento.hasMany(Medicamento, { foreignKey: "idTratamiento" });
 Medicamento.belongsTo(Farmacia, { foreignKey: "idFarmacia" });
 Farmacia.hasMany(Medicamento, { foreignKey: "idFarmacia" });
 //Paciente --> Cita
-Paciente.belongsTo(Cita, { foreignKey: "idCita" }); //{ foreignKey: "idCita", targetKey: "idCita" }
-Cita.hasMany(Paciente, { foreignKey: "idCita" }); //{ foreignKey: "idCita", sourceKey: "idCita" }
+/*Paciente.belongsTo(Cita, { foreignKey: "idCita" }); //{ foreignKey: "idCita", targetKey: "idCita" }
+Cita.hasMany(Paciente, { foreignKey: "idCita" });*/ //{ foreignKey: "idCita", sourceKey: "idCita" }
+
+// Cita --> Paciente
+Cita.belongsTo(Paciente, {
+  foreignKey: "idPaciente",
+});
+Paciente.hasMany(Cita, {
+  foreignKey: "idPaciente",
+});
 
 //Cita --> Personal_medico
 Cita.belongsTo(PersonalMedico, {
@@ -81,13 +89,13 @@ PersonalMedico.hasMany(Cita, {
 });
 
 //Cita --> GenericUser
-Cita.belongsTo(GenericUser, {
+/*Cita.belongsTo(GenericUser, {
   foreignKey: "idGenericUser",
   targetKey: "idGenericUser",
 });
 GenericUser.hasMany(Cita, {
   foreignKey: "idGenericUser",
-});
+});*/
 
 // GenericUser --> Prepagas
 Prepagas.belongsTo(GenericUser, {

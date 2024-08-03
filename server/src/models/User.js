@@ -44,6 +44,11 @@ const User = sequelize.define("user", {
   profile_picture: {
     type: DataTypes.STRING
   }
+},
+{
+  sequelize,
+  modelName: "user",
+  timestamps: true,
 });
 
 export default User;
