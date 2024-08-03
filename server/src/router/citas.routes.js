@@ -25,8 +25,8 @@ router.get("/citas/medico/:idMedico/paciente/:idPaciente", passport.authenticate
 router.get("/citas/medico/:idMedico", passport.authenticate('jwt', { session: false }), obtenerCitasPorMedico);
 router.get("/citas/paciente/:idPaciente", passport.authenticate('jwt', { session: false }), obtenerCitasPorPaciente);
 
-// router.get("/citas", obtenerCitas);
-// router.get("/citas/:id", passport.authenticate('jwt', { session: false }), obtenerCitaById);
-router.delete("/citas/:id", passport.authenticate('jwt', { session: false }), eliminarCita);git
+router.get("/citas", obtenerCitas);
+router.get("/citas/:id", passport.authenticate('jwt', { session: false }), obtenerCitaById);
+router.delete("/citas/:id", passport.authenticate('jwt', { session: false }), eliminarCita);
 
 export default router;
