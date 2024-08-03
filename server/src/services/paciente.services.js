@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import GenericUser from "../models/GenericUser.js";
 import Prepagas from "../models/Prepagas.js";
+import Paciente from "../models/Paciente.js";
 
-export const createUser = async ({ email, password, ciudad, edad, peso, grupo_sanguineo, genero, altura, alergias, telefono, direccion, contacto_familiar_telefono, contacto_familiar_relacion, nombre, nro_afiliado, plan, fecha_vencimiento }) => {
+export const createPaciente = async ({ email, password, ciudad, edad, peso, grupo_sanguineo, genero, altura, alergias, telefono, direccion, contacto_familiar_telefono, contacto_familiar_relacion, nombre, nro_afiliado, plan, fecha_vencimiento }) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await GenericUser.create({
+  const paciente = await Paciente.create({
     email,
     password: hashedPassword,
     ciudad,
@@ -25,17 +26,17 @@ export const createUser = async ({ email, password, ciudad, edad, peso, grupo_sa
     nro_afiliado,
     plan,
     fecha_vencimiento,
-    idGenericUser: user.idGenericUser
+    idGenericUser: paciente.idGenericUser
   })
 
   return {
-    user,
+    user: paciente,
     prepaga
   }
 }
 
-export async function getGenericUserByEmail(email) {
-  return GenericUser.findOne({
+export async function getPacienteByEmail(email) {
+  return Paciente.findOne({
     where: {
       email: email,
     },
