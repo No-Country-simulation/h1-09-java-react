@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import GenericUser from "../models/GenericUser.js";
 import Prepagas from "../models/Prepagas.js";
 import Paciente from "../models/Paciente.js";
 
