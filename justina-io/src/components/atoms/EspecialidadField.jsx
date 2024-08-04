@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable react/display-name */
+import React, { useState, forwardRef } from 'react';
 
-const EspecialidadField = () => {
+const EspecialidadField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
-  const options = ['Option 1', 'Option 2', 'Option 3']; 
+  const options = ['Odontologo', 'Option 2', 'Option 3']; 
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -30,6 +31,8 @@ const EspecialidadField = () => {
         className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder-text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         id="especialidad"
         onClick={handleToggle}
+        ref={ref}
+        {...props}
       >
         <span style={{ pointerEvents: 'none' }}>
           {selectedOption || 'Seleccione una opción...'}
@@ -65,6 +68,6 @@ const EspecialidadField = () => {
       )}
     </div>
   );
-};
+});
 
 export default EspecialidadField;

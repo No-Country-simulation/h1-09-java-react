@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -18,13 +19,16 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('https://h1-09-java-react.onrender.com/api/user/login', {
+      const response = await fetch('https://justina-io-api-9a1d439a2f95.herokuapp.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        credentials: 'include',
       });
+
+      console.log(response)
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -32,8 +36,23 @@ const LoginPage = () => {
 
       const result = await response.json();
       console.log(result);
-      // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
-      navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
+
+      // // Aquí puedes guardar una cookie si el backend la devuelve
+      // if (result.token) {
+      //   Cookies.set('authToken', result.token, { expires: 1 }); // Guarda la cookie con un tiempo de expiración
+      //   Cookies.get('Authorization');
+      //   console.log( Cookies.get('Authorization'))
+      // }
+
+      // console.log(result.cookie);
+
+      // Después de la solicitud de inicio de sesión
+      const cookies = Cookies.get();
+      console.log(cookies); // Muestra todas las cookies establecidas
+
+
+      // Redirige a la página principal u otra página después de un login exitoso
+      navigate('/');
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
       // Maneja los errores de autenticación aquí
@@ -157,11 +176,6 @@ const LoginPage = () => {
                   </Link>
                 </div>
 
-                {/* Mensajes de error que se mostrarían con la lógica de autenticación */}
-                {/* <div className="alert alert-error">Wrong Credentials</div>
-                <div className="alert alert-error">Error occurred while logging in</div>
-                <div className="alert alert-info">Non-valid account</div> */}
-
                 <div className="flex flex-col gap-3 mt-5">
                   <button
                     type="submit"
@@ -169,11 +183,6 @@ const LoginPage = () => {
                   >
                     Ingresar
                   </button>
-                  {/* <button
-                    className="w-full btn btn-default"
-                    onClick={(e) => e.preventDefault}
-                  >
-                  </button> */}
                   <Link to="/registrarse" className="w-full btn btn-default">
                     Registrarse
                   </Link>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import InputField from '../components/atoms/InputField';
 import PasswordInputField from '../components/atoms/PasswordInputField';
@@ -10,10 +10,37 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { FaUserPlus } from 'react-icons/fa';
 
 const CheckIn = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      const response = await fetch('https://justina-io-api-9a1d439a2f95.herokuapp.com/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        credentials: 'include',
+
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+      navigate('/login'); 
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      // Maneja los errores de autenticación aquí
+    }
   };
 
   return (
@@ -30,19 +57,19 @@ const CheckIn = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <InputField label="Teléfono" id="telefono" placeholder="Ingrese su teléfono" {...register('telefono')} />
-              <InputField label="N° Matrícula" id="matricula" placeholder="Ingrese su número de matrícula" {...register('matricula')} />
+              <InputField label="N° Matrícula" id="nro_matricula" placeholder="Ingrese su número de matrícula" {...register('nro_matricula')} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <EspecialidadField label="Especialidad" id="especialidad" placeholder="Seleccione una opción..." {...register('especialidad')} />
-              <EstadoCivilField label="Estado Civil" id="estado-civil" placeholder="Seleccione una opción..." {...register('estadoCivil')} />
+              <input label="Especialidad" id="especialidad" name='especialidad' placeholder="Seleccione una opción..." {...register('especialidad')} />
+              <input label="Estado Civil" id="estado_civil" name='estado_civil' placeholder="Seleccione una opción..." {...register('estado_civil')} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InputField label="Email" id="email" placeholder="Ingrese su email" type="email" {...register('email', { required: 'Email requerido', pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
-              <InputField label="Confirmar Email" id="confirmar-email" placeholder="Confirme su email" type="email" {...register('confirmarEmail', { required: 'Confirmar Email requerido', pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
+              <InputField label="Email" id="email" placeholder="Ingrese su email" type="text" {...register('email', { required: 'Email requerido'})} />
+              <InputField label="Confirmar Email" id="confirmar-email" placeholder="Confirme su email" type="text" {...register('confirmarEmail', { required: 'Confirmar Email requerido'})} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <PasswordInputField label="Contraseña" id="contrasena" placeholder="Ingrese su contraseña" {...register('contrasena', { required: 'Contraseña requerida', minLength: { value: 6, message: 'Mínimo 6 caracteres' } })} />
-              <PasswordInputField label="Confirmar Contraseña" id="confirmar-contrasena" placeholder="Confirme su contraseña" {...register('confirmarContrasena', { required: 'Confirmar Contraseña requerida', minLength: { value: 6, message: 'Mínimo 6 caracteres' } })} />
+              <PasswordInputField label="Contraseña" id="password" placeholder="Ingrese su contraseña" {...register('password', { required: 'Contraseña requerida', minLength: { value: 6, message: 'Mínimo 6 caracteres' } })} />
+              <PasswordInputField label="Confirmar Contraseña" id="password" placeholder="Confirme su contraseña" {...register('password', { required: 'Confirmar Contraseña requerida', minLength: { value: 6, message: 'Mínimo 6 caracteres' } })} />
             </div>
             {Object.keys(errors).length > 0 &&
               <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

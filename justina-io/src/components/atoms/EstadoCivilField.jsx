@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react/display-name */
+import React, { useState, forwardRef } from 'react';
 
-const EstadoCivilField = () => {
+const EstadoCivilField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -30,6 +31,8 @@ const EstadoCivilField = () => {
         className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder-text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         id="estado-civil"
         onClick={handleToggle}
+        ref={ref}
+        {...props}
       >
         <span style={{ pointerEvents: 'none' }}>
           {selectedOption || 'Seleccione una opción...'}
@@ -65,6 +68,6 @@ const EstadoCivilField = () => {
       )}
     </div>
   );
-};
+});
 
 export default EstadoCivilField;
