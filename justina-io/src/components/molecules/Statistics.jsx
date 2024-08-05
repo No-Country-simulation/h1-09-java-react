@@ -63,17 +63,16 @@ function Statistics() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex gap-3">
-      <div className='w-2/3'>
-
-        <AssignedMedication 
-          medicaciones={medicaciones}
-          instrucciones={instruccionesMedicacion}
-        />
-      </div>
+        <div>
+          <AssignedMedication
+            medicaciones={medicaciones}
+            instrucciones={instruccionesMedicacion}
+          />
+        </div>
         <GeneralInstructionsCard instrucciones={instruccionesGenerales} />
       </div>
-      <div className="flex w-full gap-5">
-        <div className="w-2/3">
+      <div className="flex w-full gap-3">
+        <div className="w-2/3 max-w-[868px]">
           <LineChart {...estadoData} />
         </div>
         <div className="w-1/3">

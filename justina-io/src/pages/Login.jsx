@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,26 +18,34 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
-      const response = await fetch('https://h1-09-java-react.onrender.com/api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post(
+        'https://justina-io-api-9a1d439a2f95.herokuapp.com/api/login',
+        data,
+      );
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      // Axios automáticamente lanza un error para códigos de estado no 2xx
+      // por lo que no necesitas verificar response.ok
 
-      const result = await response.json();
-      console.log(result);
-      // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
-      navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
+      // La cookie se guardará automáticamente por el navegador si el servidor la envía
+
+      // Redirige a la página principal u otra página después de un login exitoso
+      response && navigate('/');
+      console.log(response);
     } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-      // Maneja los errores de autenticación aquí
+      console.error('There was a problem with the login operation:', error);
+      // Aquí puedes manejar diferentes tipos de errores si es necesario
+      if (error.response) {
+        // El servidor respondió con un estado fuera del rango de 2xx
+        console.error('Server responded with:', error.response.status);
+      } else if (error.request) {
+        // La petición fue hecha pero no se recibió respuesta
+        console.error('No response received');
+      } else {
+        // Algo sucedió en la configuración de la petición que causó el error
+        console.error('Error setting up the request:', error.message);
+      }
     }
   };
 

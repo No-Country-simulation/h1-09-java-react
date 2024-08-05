@@ -8,8 +8,8 @@ import ChartsHome from '../components/molecules/ChartsHome';
 const Home = () => {
   return (
     <LayoutSidebar>
-      <div className="flex flex-col md:flex-row justify-start items-start md:items-start p-4 gap-4 w-full">
-        <div className='mt-9'>
+      <div className="flex flex-col items-start justify-start w-full gap-4 py-4 md:flex-row md:items-start">
+        <div className="mt-9">
           <ChartsHome />
           <Chats />
         </div>
