@@ -51,7 +51,7 @@ const CircleChart = ({ title, data, colors }) => {
           height={224}
         />
       </div>
-      <div className="absolute p-2 bg-white rounded top-4 right-4 bg-opacity-80">
+      <div className="absolute p-2 bg-white rounded top-12 right-4 bg-opacity-80">
         {data.map((item, index) => (
           <div key={index} className="flex items-center mb-1">
             <span
