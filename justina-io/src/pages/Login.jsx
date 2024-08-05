@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  console.log(import.meta.env.VITE_BASE_URL_PRE_PROD);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('https://h1-09-java-react.onrender.com/api/user/login', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
