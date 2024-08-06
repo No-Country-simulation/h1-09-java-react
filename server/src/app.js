@@ -21,10 +21,25 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://justina-io-api-9a1d439a2f95.herokuapp.com',
+  'https://66b15b6c65ae262f4e8853b1--justina-h1-09.netlify.app',
+  'https://justina-h1-09.netlify.app'
+];
+
 app.use(cors({
-  origin: "*",
+  origin: function(origin, callback) {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(passport.initialize());
