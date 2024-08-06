@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL_DEV}/login`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

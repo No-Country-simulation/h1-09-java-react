@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Patients from '../pages/Patients';
 import PatientsList from '../pages/PatientsList';
+import {GetPacientes} from "./loaders/getPacientes.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +42,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/pacientes',
+    loader: () => GetPacientes(),
     element: (
         <PatientsList />
     ),
