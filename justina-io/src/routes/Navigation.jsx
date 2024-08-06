@@ -8,49 +8,68 @@ import Home from '../pages/Home';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Patients from '../pages/Patients';
 import PatientsList from '../pages/PatientsList';
-import {GetPacientes} from "./loaders/getPacientes.jsx";
+import {GetPacientes} from './loaders/getPacientes.jsx';
+import {UserGuestRoutes} from './UserGuestRoutes.jsx';
+import {UserPrivateRoutes} from "./UserPrivateRoutes.jsx";
 
 const routes = createBrowserRouter([
   {
     path: '/login',
-    element: <Login />,
+    element: (
+        <UserGuestRoutes>
+          <Login />
+        </UserGuestRoutes>
+    ),
   },
   {
     path: '/registrarse',
     element: (
-        <CheckIn />
+        <UserGuestRoutes>
+          <CheckIn />
+        </UserGuestRoutes>
     ),
   },
   {
     path: '/',
-    element: (
-        <Home />
+    element:  (
+        <UserPrivateRoutes>
+          <Home />
+        </UserPrivateRoutes>
     ),
   },
   {
     path: '/editar-perfil',
-    element: <EditProfile /> 
-  ,
+    element: (
+        <UserPrivateRoutes>
+          <EditProfile />
+        </UserPrivateRoutes>
+    ),
   },
   {
     path: '/recuperacion',
     element: (
-      <LayoutsNav>
-        <PasswordRecovery />
-      </LayoutsNav>
+        <UserPrivateRoutes>
+          <LayoutsNav>
+            <PasswordRecovery />
+          </LayoutsNav>
+        </UserPrivateRoutes>
     ),
   },
   {
     path: '/pacientes',
-    loader: () => GetPacientes(),
     element: (
-        <PatientsList />
+        <UserPrivateRoutes>
+          <PatientsList />
+        </UserPrivateRoutes>
     ),
+    loader: () => GetPacientes(),
   },
   {
     path: '/paciente',
     element: (
-        <Patients />
+        <UserPrivateRoutes>
+          <Patients />
+        </UserPrivateRoutes>
     ),
   },
 ]);

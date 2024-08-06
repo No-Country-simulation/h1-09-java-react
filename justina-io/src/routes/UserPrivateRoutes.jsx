@@ -1,17 +1,17 @@
 /**
  * Componente que redirecciona al usuario cuando
- * no está autenticado: Login, Signup
+ * ya está autenticado.
  */
 
 import { Navigate } from 'react-router-dom';
 import { useGlobalReducer } from '../hooks/useGlobalReducer.jsx';
 
-export function UserGuestRoutes({ children }) {
+export function UserPrivateRoutes({ children }) {
 
     const { isAuthenticated } = useGlobalReducer();
 
-    if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
     }
 
     return children;

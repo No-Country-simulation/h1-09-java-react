@@ -3,7 +3,7 @@ import {logoutApi} from '../core/api/logout.api.jsx';
 
 export const initialState = {
     user: null,
-    isAuthenticated: false
+    isAuthenticated: !!window.localStorage.getItem('userJustina')
 };
 
 export const storeReducer = (state, action) => {

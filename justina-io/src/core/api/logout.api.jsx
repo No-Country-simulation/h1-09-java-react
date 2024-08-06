@@ -2,6 +2,14 @@ import Swal from 'sweetalert2';
 
 export async function logoutApi() {
 
+    Swal.fire({
+        position: 'top-middle',
+        icon: 'success',
+        title: 'Hasta luego!',
+        showConfirmButton: false,
+        timer: 1000
+    });
+
     try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/logout`, {
             method: 'POST',
@@ -22,14 +30,6 @@ export async function logoutApi() {
         }
 
         console.log( await response.json() );
-
-        Swal.fire({
-            position: 'top-middle',
-            icon: 'success',
-            title: 'Hasta luego!',
-            showConfirmButton: false,
-            timer: 1000
-        });
 
     } catch (error) {
         console.error('Error fetching patients data:', error);
