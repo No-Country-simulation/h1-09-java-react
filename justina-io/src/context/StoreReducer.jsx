@@ -1,4 +1,5 @@
 import {Types_Reducer} from '../interfaces/Types_Reducer.jsx';
+import {logoutApi} from '../core/api/logout.api.jsx';
 
 export const initialState = {
     user: null,
@@ -15,6 +16,7 @@ export const storeReducer = (state, action) => {
             };
         case Types_Reducer.AUTH_LOGOUT:
             window.localStorage.removeItem('userJustina');
+            logoutApi();
             return {
                 ...state,
                 user: null,

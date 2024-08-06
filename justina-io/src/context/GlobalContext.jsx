@@ -1,5 +1,6 @@
 import {createContext, useCallback, useMemo, useReducer} from 'react';
 import {initialState, storeReducer} from './StoreReducer.jsx';
+import {Types_Reducer} from '../interfaces/Types_Reducer.jsx';
 
 export const GlobalContext = createContext(null);
 
@@ -9,11 +10,11 @@ export const GlobalContextProvider = ({ children }) => {
 
     const login = useCallback( ( user ) => {
         window.localStorage.setItem('userJustina', JSON.stringify(user));
-        dispatch({ type: 'AUTH_LOGIN', payload: user });
+        dispatch({ type: Types_Reducer.AUTH_LOGIN, payload: user });
     }, []);
 
     const logout = useCallback( () => {
-        dispatch({ type: 'AUTH_LOGOUT' });
+        dispatch({ type: Types_Reducer.AUTH_LOGOUT });
     }, []);
 
     const contextValue = useMemo(() => ({
