@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import Card from '../card/Card';
 
 const CardPatients = ({ pacientes }) => {
-
+  
   const [patients, setPatients] = useState([]);
   const photos = useMemo(() => [
     'img/image6.png',

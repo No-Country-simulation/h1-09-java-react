@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import {useGlobalReducer} from '../hooks/useGlobalReducer.jsx';
 
 const LoginPage = () => {
-  console.log(import.meta.env.VITE_BASE_URL_PRE_PROD);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+
+  const { login } = useGlobalReducer();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -34,6 +36,7 @@ const LoginPage = () => {
 
       const result = await response.json();
       console.log(result);
+      login(result.data);
       // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
       navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
     } catch (error) {
