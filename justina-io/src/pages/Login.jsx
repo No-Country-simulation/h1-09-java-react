@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import {useGlobalReducer} from '../hooks/useGlobalReducer.jsx';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+
+  const { login } = useGlobalReducer();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -18,12 +21,13 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('https://h1-09-java-react.onrender.com/api/user/login', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        'credentials': 'include',
       });
 
       if (!response.ok) {
@@ -32,6 +36,7 @@ const LoginPage = () => {
 
       const result = await response.json();
       console.log(result);
+      login(result.data);
       // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
       navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
     } catch (error) {

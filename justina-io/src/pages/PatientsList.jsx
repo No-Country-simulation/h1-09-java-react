@@ -1,7 +1,11 @@
 import CardPatients from '../components/card/CardPatients';
 import LayoutSidebar from '../layouts/layoutSidebar';
+import {useLoaderData} from 'react-router-dom';
 
 function PatientsList() {
+  
+  const pacientes = useLoaderData();
+  
   return (
     <LayoutSidebar>
     <div className="flex md:items-end w-full">
@@ -73,7 +77,7 @@ function PatientsList() {
         </div>
       </article>
       <article>
-        <CardPatients />
+        <CardPatients pacientes={pacientes} />
       </article>
     </section>
     </div>
