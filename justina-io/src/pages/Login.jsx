@@ -19,12 +19,13 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_DEV}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        'credentials': 'include',
       });
 
       if (!response.ok) {
