@@ -1,7 +1,7 @@
 import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
 import User from "../models/User.js";
-import GenericUser from "../models/GenericUser.js";
+import Paciente from "../models/Paciente.js";
 
 const cookieExtractor = (req) => {
   let cookie = null
@@ -12,7 +12,6 @@ const cookieExtractor = (req) => {
 }
 
 const opts = {
-  // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   jwtFromRequest: cookieExtractor,
   secretOrKey: process.env.JWT_SECRET || "default-secret",
 };
@@ -24,8 +23,8 @@ passport.use(
       if (jwt_payload.id) {
         user = await User.findByPk(jwt_payload.id);
       }
-      if (jwt_payload.idGenericUser) {
-        user = await GenericUser.findByPk(jwt_payload.idGenericUser);
+      if (jwt_payload.idPaciente) {
+        user = await Paciente.findByPk(jwt_payload.idPaciente);
       }
       if (user) {
         return done(null, user);
