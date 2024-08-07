@@ -2,10 +2,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import {useGlobalReducer} from '../hooks/useGlobalReducer.jsx';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+
+  const { login } = useGlobalReducer();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -20,19 +23,24 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await axios.post(
-        'https://justina-io-api-9a1d439a2f95.herokuapp.com/api/login',
-        data,
-      );
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        'credentials': 'include',
+      });
 
-      // Axios automáticamente lanza un error para códigos de estado no 2xx
-      // por lo que no necesitas verificar response.ok
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-      // La cookie se guardará automáticamente por el navegador si el servidor la envía
-
-      // Redirige a la página principal u otra página después de un login exitoso
-      response && navigate('/');
-      console.log(response);
+      const result = await response.json();
+      console.log(result);
+      login(result.data);
+      // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
+      navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
     } catch (error) {
       console.error('There was a problem with the login operation:', error);
       // Aquí puedes manejar diferentes tipos de errores si es necesario

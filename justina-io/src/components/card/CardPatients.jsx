@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, {useEffect, useMemo, useState} from 'react';
 import Card from '../card/Card';
 
-const CardPatients = () => {
+const CardPatients = ({ pacientes }) => {
+  
   const [patients, setPatients] = useState([]);
-  const [error, setError] = useState(null);
-  const photos = [
+  const photos = useMemo(() => [
     'img/image6.png',
     'img/frame5.png',
     'img/image1.png',
@@ -15,9 +14,17 @@ const CardPatients = () => {
     'img/image6.png',
     'img/frame5.png',
     'img/image6.png',
-  ];
+  ], []);
 
   useEffect(() => {
+    if(pacientes) {
+      const patientsData = pacientes.map((patient, index) => ({
+        name: `${patient.nombre} ${patient.apellido}`,
+        photo: photos[index % photos.length],
+      }));
+      setPatients(patientsData);
+    }
+  }, [pacientes, photos]);
     const fetchPatients = async () => {
       try {
         //const token =
