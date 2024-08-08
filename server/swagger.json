@@ -1,0 +1,708 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Justina.io",
+    "description": "API de la aplicación **_Justina.io_** que se encarga de gestionar la información de la base de datos en MySQL. Esta aplicación facilita y agiliza cada vez más el impacto exponencial en la salud de las personas.",
+    "contact": {
+      "name": "H1-09-java-react"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://justina-io-api-9a1d439a2f95.herokuapp.com/api",
+      "description": "Servidor en Heroku (Prod1)"
+    },
+    {
+      "url": "https://h1-09-java-react.onrender.com/api",
+      "description": "Servidor en Render (Prod2)"
+    },
+    {
+      "url": "http://localhost:8080/api",
+      "description": "Servidor local (Dev)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "pacientes",
+      "description": "Endpoint que maneja toda la información referente a los pacientes."
+    },
+    {
+      "name": "citas",
+      "description": "Endpoint que maneja toda la información referente a las citas."
+    }
+  ],
+  "paths": {
+    "/pacientes/register": {
+      "post": {
+        "tags": [
+          "pacientes"
+        ],
+        "summary": "Registro de paciente nuevo.",
+        "description": "Permite registar a un paciente nuevo.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/signupPaciente"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Registro de paciente exitoso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/signupExitoso"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/pacientes/login": {
+      "post": {
+        "tags": [
+          "pacientes"
+        ],
+        "summary": "Inicio de sesión y autenticación de pacientes",
+        "description": "Permite a un paciente registrado iniciar sesión y obtener un token de seguridad.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginPaciente"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Login exitoso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginExitoso"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/citas/crearCita": {
+      "post": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Registro de nuevas citas.",
+        "description": "Permite registar una nueva cita.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/crearCita"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Cita registrada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/citaCreadaExitosamente"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/citas/medico/{idMedico}/paciente/{idPaciente}": {
+      "get": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Lista de todas las citas entre un medico y un paciente.",
+        "description": "Retorna un arreglo con todas las citas en el sistema entre un medico y un paciente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idMedico",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del medico"
+          },
+          {
+            "in": "path",
+            "name": "idPaciente",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del paciente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista generada exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listaDeCitas"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/citas/medico/{idMedico}": {
+      "get": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Lista de todas las citas de un medico.",
+        "description": "Retorna un arreglo con todas las citas en el sistema de un medico.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idMedico",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del medico"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista generada exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listaDeCitas"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/citas/paciente/{idPaciente}": {
+      "get": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Lista de todas las citas de un paciente.",
+        "description": "Retorna un arreglo con todas las citas en el sistema de un paciente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idPaciente",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Id del paciente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista generada exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listaDeCitas"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Unauthorized": {
+        "description": "(Unauthorized) No hay autorización para llamar el servicio"
+      },
+      "NotFound": {
+        "description": "(NotFound) No se encontró información"
+      },
+      "BadRequest": {
+        "description": "(BadRequest) Datos enviados incorrectos o hay datos obligatorios no enviados"
+      },
+      "ServerError": {
+        "description": "(ServerError) Error en el servidor"
+      }
+    },
+    "parameters": {
+      "token": {
+        "in": "header",
+        "name": "token",
+        "description": "Token de autenticación.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Id del usuario",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "signupPaciente": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "guess@none.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "unpasswordcualquiera"
+          },
+          "ciudad": {
+            "type": "string",
+            "example": "Buenos Aires"
+          },
+          "edad": {
+            "type": "number",
+            "example": 20
+          },
+          "peso": {
+            "type": "number",
+            "example": 65.5
+          },
+          "grupo_sanguineo": {
+            "type": "string",
+            "example": "O-"
+          },
+          "genero": {
+            "type": "string",
+            "example": "M"
+          },
+          "altura": {
+            "type": "number",
+            "example": 1.75
+          },
+          "alergias": {
+            "type": "string",
+            "example": "Oxycodon"
+          },
+          "telefono": {
+            "type": "string",
+            "example": 5555001111
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Av. Siempre Viva 332"
+          },
+          "contacto_familiar_telefono": {
+            "type": "string",
+            "example": 5555001122
+          },
+          "contacto_familiar_relacion": {
+            "type": "string",
+            "example": "Madre"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Juan Perez"
+          },
+          "nro_afiliado": {
+            "type": "string",
+            "example": 98765
+          },
+          "plan": {
+            "type": "string",
+            "example": "Basico"
+          },
+          "fecha_vencimiento": {
+            "type": "string",
+            "example": "12/10/2024"
+          }
+        }
+      },
+      "signupExitoso": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Paciente creado exitosamente"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paciente": {
+                "type": "object",
+                "properties": {
+                  "idGenericUser": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "guess@none.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "unpasswordcualquiera"
+                  },
+                  "ciudad": {
+                    "type": "string",
+                    "example": "Buenos Aires"
+                  },
+                  "edad": {
+                    "type": "number",
+                    "example": 20
+                  },
+                  "peso": {
+                    "type": "number",
+                    "example": 65.5
+                  },
+                  "grupo_sanguineo": {
+                    "type": "string",
+                    "example": "O-"
+                  },
+                  "genero": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "altura": {
+                    "type": "number",
+                    "example": 1.75
+                  },
+                  "alergias": {
+                    "type": "string",
+                    "example": "Oxycodon"
+                  },
+                  "telefono": {
+                    "type": "string",
+                    "example": 5555001111
+                  },
+                  "direccion": {
+                    "type": "string",
+                    "example": "Av. Siempre Viva 332"
+                  },
+                  "contacto_familiar_telefono": {
+                    "type": "string",
+                    "example": 5555001122
+                  },
+                  "contacto_familiar_relacion": {
+                    "type": "string",
+                    "example": "Madre"
+                  },
+                  "createddAt": {
+                    "type": "string",
+                    "example": "2024-07-31T00:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2024-07-31T00:00:00.000Z"
+                  }
+                }
+              },
+              "prepaga": {
+                "type": "object",
+                "properties": {
+                  "idPrepagas": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "idGenericUser": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "createddAt": {
+                    "type": "string",
+                    "example": "2024-07-31T00:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2024-07-31T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "loginPaciente": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "guess@none.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "unpasswordcualquiera"
+          }
+        }
+      },
+      "loginExitoso": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": false
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Login exitoso!"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "email": {
+                "type": "string",
+                "example": "guess@none.com"
+              },
+              "role": {
+                "type": "string",
+                "example": "USER"
+              },
+              "token": {
+                "type": "string",
+                "example": "my_token_characters"
+              }
+            }
+          }
+        }
+      },
+      "crearCita": {
+        "type": "object",
+        "required": [
+          "idPersonal_medico",
+          "idGenericUser",
+          "tipoDeConsulta",
+          "motivo",
+          "status"
+        ],
+        "properties": {
+          "idPersonal_medico": {
+            "type": "number",
+            "example": 1
+          },
+          "idGenericUser": {
+            "type": "number",
+            "example": 1
+          },
+          "tipoDeConsulta": {
+            "type": "string",
+            "example": "presencial"
+          },
+          "ubicacion": {
+            "type": "string",
+            "example": "avenida siempre viva"
+          },
+          "motivo": {
+            "type": "string",
+            "example": "control"
+          },
+          "status": {
+            "type": "string",
+            "example": "pendiente"
+          }
+        }
+      },
+      "citaCreadaExitosamente": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Cita creada exitosamente"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "idPersonal_medico": {
+                "type": "number",
+                "example": 1
+              },
+              "idGenericUser": {
+                "type": "number",
+                "example": 1
+              },
+              "tipoDeConsulta": {
+                "type": "string",
+                "example": "presencial"
+              },
+              "ubicacion": {
+                "type": "string",
+                "example": "avenida siempre viva"
+              },
+              "motivo": {
+                "type": "string",
+                "example": "control"
+              },
+              "status": {
+                "type": "string",
+                "example": "pendiente"
+              }
+            }
+          }
+        }
+      },
+      "listaDeCitas": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Lista de citas obtenida exitosamente"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "idPersonal_medico": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idGenericUser": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipoDeConsulta": {
+                  "type": "string",
+                  "example": "presencial"
+                },
+                "ubicacion": {
+                  "type": "string",
+                  "example": "avenida siempre viva"
+                },
+                "motivo": {
+                  "type": "string",
+                  "example": "control"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "pendiente"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

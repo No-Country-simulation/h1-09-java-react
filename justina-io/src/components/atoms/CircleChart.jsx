@@ -39,8 +39,8 @@ const CircleChart = ({ title, data, colors }) => {
   const series = data.map((item) => item.value);
 
   return (
-    <div className="relative bg-white rounded-lg border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark p-4">
-      <h5 className="text-xl font-semibold text-black dark:text-white mb-16">
+    <div className="relative max-w-[406px] bg-white rounded-lg border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark p-4 max-h-[333px]">
+      <h5 className="mb-16 text-xl font-semibold text-black dark:text-white">
         {title}
       </h5>
       <div className="h-[224px]">
@@ -51,11 +51,11 @@ const CircleChart = ({ title, data, colors }) => {
           height={224}
         />
       </div>
-      <div className="absolute top-4 right-4 bg-white bg-opacity-80 p-2 rounded">
+      <div className="absolute p-2 bg-white rounded top-12 right-4 bg-opacity-80">
         {data.map((item, index) => (
           <div key={index} className="flex items-center mb-1">
             <span
-              className="w-3 h-3 rounded-full mr-2"
+              className="w-3 h-3 mr-2 rounded-full"
               style={{ backgroundColor: options.colors[index] }}
             ></span>
             <span className="text-sm font-medium text-black dark:text-white">

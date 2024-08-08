@@ -1,11 +1,19 @@
 import React from 'react';
 
 const AppointmentPatients = ({
-  textTime, titleTime, textReason, titleReason, textSpecialty, titleSpecialty,
-  titleSpecialist, textSpecialist, status, titleDataDays
+  textTime,
+  titleTime,
+  textReason,
+  titleReason,
+  textSpecialty,
+  titleSpecialty,
+  titleSpecialist,
+  textSpecialist,
+  status,
+  titleDataDays,
 }) => {
   return (
-    <div className="flex mb-4 relative">
+    <div className="relative flex mb-4">
       <div className="flex flex-col items-center mr-2">
         <div className="flex items-center mb-2">
           <div className="w-3 h-3 bg-[#007CA0] rounded-full"></div>
@@ -13,7 +21,7 @@ const AppointmentPatients = ({
         </div>
         <div className="flex-1 w-px bg-[#BFBFBF] h-full mt-1 -ml-16"></div>
       </div>
-      <div className="flex-1 border rounded-lg p-4 flex flex-col justify-between bg-white">
+      <div className="flex flex-col justify-between flex-1 p-4 bg-white border rounded-lg">
         <div className="grid grid-cols-8 gap-4">
           <div>
             <div className="font-bold">{titleTime}</div>
@@ -31,10 +39,10 @@ const AppointmentPatients = ({
             <div className="font-bold">{titleSpecialist}</div>
             <div className="text-sm text-gray-500">{textSpecialist}</div>
           </div>
-        <div className="flex items-center justify-end">
-          <div className="text-[#359B4B] text-2xl">&#x2022;</div>
-          <div className="ml-2">{status}</div>
-        </div>
+          <div className="flex items-center justify-end">
+            <div className="text-[#359B4B] text-2xl">&#x2022;</div>
+            <div className="ml-2">{status}</div>
+          </div>
         </div>
       </div>
     </div>

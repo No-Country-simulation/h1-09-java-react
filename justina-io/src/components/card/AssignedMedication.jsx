@@ -1,14 +1,14 @@
 function AssignedMedication({ medicaciones, instrucciones }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 h-[223px]">
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-white rounded-lg shadow-md p-4 w-[868px] h-[223px]">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
           Medicación asignada
         </h2>
-        <button className="text-blue-500 hover:text-blue-600 flex items-center">
+        <button className="flex items-center text-blue-500 hover:text-blue-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-1"
+            className="w-5 h-5 mr-1"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -26,7 +26,7 @@ function AssignedMedication({ medicaciones, instrucciones }) {
         {medicaciones.map((med, index) => (
           <span
             key={index}
-            className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+            className="px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full"
           >
             {med}
           </span>
@@ -36,7 +36,7 @@ function AssignedMedication({ medicaciones, instrucciones }) {
         {instrucciones.map((inst, index) => (
           <span
             key={index}
-            className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+            className="px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full"
           >
             {inst}
           </span>

@@ -11,21 +11,21 @@ const TuAgenda = () => {
         <Calendar />
       </div>
       <div className="w-full h-[365px] overflow-y-auto">
-        <Appointment 
+        <Appointment
           time="8:00 am"
           title="Consulta"
           duration="8:00 - 8:30"
           person="Mateo Fernandez"
           status="Confirmado"
         />
-        <Appointment 
+        <Appointment
           time="8:30 am"
           title="Seguimiento"
           duration="8:30 - 9:00"
           person="Ana Rodriguez"
           status="Confirmado"
         />
-        <Appointment 
+        <Appointment
           time="9:00 am"
           title="Seguimiento"
           duration="9:00 - 9:30"

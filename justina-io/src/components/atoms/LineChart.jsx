@@ -59,7 +59,7 @@ const LineChart = ({ title, series, categories, colors, yaxisMax }) => {
 
   return (
     <div className="rounded-lg border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
-      <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap mb-3 py-4">
+      <div className="flex flex-wrap items-start justify-between gap-3 py-4 mb-3 sm:flex-nowrap">
         <h2 className="text-xl font-semibold text-black dark:text-white">
           {title}
         </h2>

@@ -1,9 +1,14 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {useGlobalReducer} from '../hooks/useGlobalReducer.jsx';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const { login } = useGlobalReducer();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -15,9 +20,41 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // Aquí es donde agregarás la lógica de autenticación
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_PRE_PROD}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        'credentials': 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+      login(result.data);
+      // Aquí es donde agregarás la lógica de redireccionamiento después de un login exitoso
+      navigate('/'); // Redirige a la página principal u otra página después de un login exitoso
+    } catch (error) {
+      console.error('There was a problem with the login operation:', error);
+      // Aquí puedes manejar diferentes tipos de errores si es necesario
+      if (error.response) {
+        // El servidor respondió con un estado fuera del rango de 2xx
+        console.error('Server responded with:', error.response.status);
+      } else if (error.request) {
+        // La petición fue hecha pero no se recibió respuesta
+        console.error('No response received');
+      } else {
+        // Algo sucedió en la configuración de la petición que causó el error
+        console.error('Error setting up the request:', error.message);
+      }
+    }
   };
 
   return (

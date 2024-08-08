@@ -76,27 +76,31 @@ function Patients() {
           <h3 className="text-2xl font-semibold text-gray-700">
             Pacientes
             <span className="ms-5">{'>'} </span>
-            <span className="font-normal ms-2">Hernan Velazco</span>
+            <span className="font-normal ms-2">Juan Perez</span>
           </h3>
           <div className="flex gap-5 font-semibold me-5 text-[#007CA0] text-lg">
-            <h3 className="cursor-pointer" onClick={handleOpenRecipeModal}>+ Agregar Receta</h3>
-            <h3 className="cursor-pointer" onClick={handleOpenAppointmentModal}>+ Agregar Cita</h3>
+            <h3 className="cursor-pointer" onClick={handleOpenRecipeModal}>
+              + Agregar Receta
+            </h3>
+            <h3 className="cursor-pointer" onClick={handleOpenAppointmentModal}>
+              + Agregar Cita
+            </h3>
           </div>
         </article>
         <article className="flex gap-5">
-          <div className="inline-flex items-center justify-between w-2/3 p-5 bg-white rounded-xl">
+          <div className="inline-flex items-center justify-between w-2/3 p-5 bg-white rounded-xl h-[120px]">
             <div className="flex gap-5">
               <span>
                 <div className="avatar">
                   <div className="w-12 rounded-full">
-                    <img src="/img/image9.png" alt="Profile" />
+                    <img src="/img/image6.png" alt="Profile" />
                   </div>
                 </div>
               </span>
               <span>
-                <h3 className="font-semibold">Hernan Velazco</h3>
+                <h3 className="font-semibold">Juan Perez</h3>
                 <h5 className="text-gray-500 underline cursor-pointer">
-                  hernanvelazco@gmail.com
+                  juanperez@gmail.com
                 </h5>
               </span>
             </div>
@@ -127,7 +131,12 @@ function Patients() {
         <article className="w-full">
           <div className="font-semibold text-gray-700 border-b border-gray-300">
             <ul className="flex gap-8 ms-2">
-              {['Tratamiento', 'Citas', 'Datos del paciente', 'Historial clinico'].map((section) => (
+              {[
+                'Tratamiento',
+                'Citas',
+                'Datos del paciente',
+                'Historial clinico',
+              ].map((section) => (
                 <li
                   key={section}
                   className={`nav-item ${activeSection === section ? 'active' : ''}`}
@@ -139,16 +148,24 @@ function Patients() {
             </ul>
           </div>
         </article>
-        <article className="w-full p-2">
-          {renderSectionContent()}
-        </article>
+        <article className="w-full p-2">{renderSectionContent()}</article>
       </section>
 
       {isRecipeModalOpen && <Recipe onClose={handleCloseRecipeModal} />}
 
-      {isAppointmentModalOpen && <AppointmentModal onClose={handleCloseAppointmentModal} onNext={handleOpenConfirmationModal} />}
+      {isAppointmentModalOpen && (
+        <AppointmentModal
+          onClose={handleCloseAppointmentModal}
+          onNext={handleOpenConfirmationModal}
+        />
+      )}
 
-      {isConfirmationModalOpen && <ConfirmationModal onBack={handleBackToAppointmentModal} onClose={handleCloseConfirmationModal} />}
+      {isConfirmationModalOpen && (
+        <ConfirmationModal
+          onBack={handleBackToAppointmentModal}
+          onClose={handleCloseConfirmationModal}
+        />
+      )}
     </LayoutSidebar>
   );
 }

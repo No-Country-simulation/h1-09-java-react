@@ -12,7 +12,7 @@ const Citas = () => {
       titleSpecialist: 'Especialista',
       textSpecialist: 'Dr. Mateo Fernandez',
       status: 'Confirmado',
-      titleDataDays: 'Jueves 12'
+      titleDataDays: 'Jueves 12',
     },
     {
       textTime: '8:30 am',
@@ -24,7 +24,7 @@ const Citas = () => {
       titleSpecialist: 'Especialista',
       textSpecialist: 'Dra. Ana Rodriguez',
       status: 'Confirmado',
-      titleDataDays: 'Viernes 13'
+      titleDataDays: 'Viernes 13',
     },
     {
       textTime: '9:00 am',
@@ -36,25 +36,27 @@ const Citas = () => {
       titleSpecialist: 'Especialista',
       textSpecialist: 'Dr. Hernan Velazco',
       status: 'Confirmado',
-      titleDataDays: 'No hay más citas registradas'
-    }
+      titleDataDays: 'No hay más citas registradas',
+    },
   ];
 
   return (
     <div className="w-full h-[365px] overflow-y-auto">
       {citas.map((cita, index) => (
-        <div key={index} className="flex mb-4 relative">
+        <div key={index} className="relative flex mb-4">
           <div className="flex flex-col items-center mr-2">
             <div className="flex items-center mb-2">
               <div className="w-3 h-3 bg-[#007CA0] rounded-full"></div>
-              <div className="ml-2 text-right text-[#4D516F]">{cita.titleDataDays}</div>
+              <div className="ml-2 text-right text-[#4D516F]">
+                {cita.titleDataDays}
+              </div>
             </div>
             {cita.titleDataDays !== 'No hay más citas registradas' && (
               <div className="flex-1 w-px bg-[#BFBFBF] h-full mt-1 -ml-16"></div>
             )}
           </div>
           {cita.titleDataDays !== 'No hay más citas registradas' ? (
-            <div className="flex-1 border rounded-lg p-4 flex flex-col justify-between bg-white">
+            <div className="flex flex-col justify-between flex-1 p-4 bg-white border rounded-lg">
               <div className="grid grid-cols-5 gap-4">
                 <div>
                   <div className="font-bold">{cita.titleTime}</div>
@@ -66,18 +68,22 @@ const Citas = () => {
                 </div>
                 <div>
                   <div className="font-bold">{cita.titleSpecialty}</div>
-                  <div className="text-sm text-gray-500">{cita.textSpecialty}</div>
+                  <div className="text-sm text-gray-500">
+                    {cita.textSpecialty}
+                  </div>
                 </div>
                 <div>
                   <div className="font-bold">{cita.titleSpecialist}</div>
-                  <div className="text-sm text-gray-500">{cita.textSpecialist}</div>
+                  <div className="text-sm text-gray-500">
+                    {cita.textSpecialist}
+                  </div>
                 </div>
-              <div className="flex items-center justify-end">
-                <div className="text-[#359B4B] text-2xl">&#x2022;</div>
-                <div className="ml-2">{cita.status}</div>
+                <div className="flex items-center justify-end">
+                  <div className="text-[#359B4B] text-2xl">&#x2022;</div>
+                  <div className="ml-2">{cita.status}</div>
+                </div>
               </div>
             </div>
-              </div>
           ) : (
             <p></p>
           )}
