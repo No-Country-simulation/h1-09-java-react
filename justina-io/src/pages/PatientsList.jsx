@@ -126,10 +126,10 @@ function PatientsList() {
           </label>
         </div>
         <div className="flex items-center gap-3">
-          <select className="max-w-xs select select-bordered">
-            <option selected>Nuevos</option>
-            <option>Viejos</option>
-            <option>F</option>
+          <select defaultValue="1" className="max-w-xs select select-bordered">
+            <option value='1'>Nuevos</option>
+            <option value='2'>Viejos</option>
+            <option value='3'>F</option>
           </select>
           <span className="items-center px-3 py-1 bg-white rounded-full select-bordered select">
             <svg
